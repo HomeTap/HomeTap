@@ -1,32 +1,57 @@
 var chai = require('chai'),
     mongoose = require('mongoose');
 
-var expect = chai.expect; 
-var mongodbUri = ' mongodb://hometapadminp:HomeTap2015@ds051943.mongolab.com:51943/hometap';
+var expect = chai.expect;
+var dbURI = 'mongodb://hometapadminp:HomeTap2015@ds051943.mongolab.com:51943/hometap';
+// var dbURI = require('./config').dbURI;
+var db;
 
+mongoose.connection.on('error', function(err){
+  console.log(err);
+});
 
 describe('Test Database Schema', function() {
-  beforeEach('Connect to Database', function(done){
-    mongoose.connect(mongodbUri);
+  var Beer = require('../models/beer.js');
+
+  before('Connect to Database', function(done){
+    db = mongoose.connect(dbURI);
+    db.connection.on('open', done);
   });
 
-  afterEach('Close connection to Databse', function(done){
-
+  after('Close connection to Databse', function(done){
+    db.disconnect(done);
   });
 
-  it('should connect to the user schema', function(done){
+  describe('Test Beer Schema', function() {
 
-  });
+    it('It should save a beer', function(done){
+      var Beer = require('../models/beer.js');
+      var lager = new Beer({
+        name: 'Yummy',
+        categoryId: 17,
+        description: 'a great beer',
+        stars: 4.3
+      });
 
-  it('should connecto to the beer schema', function(done){
+      lager.save(done);
+    });
 
-  });
+    it('should find the beer it saved', function(done){
 
-  it('should connect to the account schema', function(done){
+      Beer.find({}, function(err, beers){
+        expect(err).to.not.be.ok;
+        expect(beers.length).to.equal(1);
+        done();
+      });
+    });
 
-  });
-
-  it('should connecto to the categories schema', function(done){
-
+    it('should remove all beers', function(done){
+      Beer.find({}, function(err, beers){
+        beers.forEach(function(beer){
+          beer.remove();
+          if(!!beers.length) done();
+        });
+      });
+    });
   });
 });

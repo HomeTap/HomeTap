@@ -38,6 +38,7 @@ app.use(passport.session());
 
 function ensureAuthenticated (req, res, next) {
   if (req.isAuthenticated()) { return next(); }
+  res.status(401);
   res.redirect('/');
 }
 
@@ -46,14 +47,12 @@ app.use('/users', ensureAuthenticated, users);
 app.use('/admin', ensureAuthenticated, admin);
 
 app.use(function (req, res, next) {
-  console.error('***** Error: no such route exists *****');
   var err = new Error('Page Not Found');
   err.status = 404;
   next(err);
 });
 
-//may need to add parameter next if subsequent calls are required
-app.use(function (err, req, res) {
+app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {title: err.message, error: err});
 });

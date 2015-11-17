@@ -46,17 +46,17 @@ app.use('/', routes);
 app.use('/users', ensureAuthenticated, users);
 app.use('/admin', ensureAuthenticated, admin);
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   var err = new Error('Page Not Found');
   err.status = 404;
   next(err);
 });
 
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {title: err.message, error: err});
 });
 
-app.listen(3000, function () {
+app.listen(3000, function() {
   console.log('Listening on port 3000 ...');
 });

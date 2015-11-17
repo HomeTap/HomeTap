@@ -10,7 +10,6 @@ var accountSchema = new Schema({
   subscription: String
 });
 
-
 var User = mongoose.model('User', accountSchema);
 
 module.exports = User;

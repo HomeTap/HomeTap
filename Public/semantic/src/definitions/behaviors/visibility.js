@@ -1214,3 +1214,4 @@ $.fn.visibility.settings = {
 };
 
 })( jQuery, window, document );
+

@@ -70,3 +70,4 @@ if(config.rtl) {
   gulp.task('watch-rtl', 'Build all files as RTL', watchRTL);
   gulp.task('build-rtl', 'Watch files as RTL ', buildRTL);
 }
+

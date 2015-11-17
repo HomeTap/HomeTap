@@ -5,7 +5,7 @@ var gulp = require('gulp'),
     jscs = require('gulp-jscs'),
     mocha = require('gulp-mocha');
 
-var jsPaths = ['models/*.js', './*.js'];
+var jsPaths = ['models/*.js', './*.js', 'test/*.js'];
 
 gulp.task('jsStyle', function() {
   return gulp.src(jsPaths)

@@ -7,9 +7,6 @@ var gulp = require('gulp'),
 
 var jsPaths = ['models/*.js', './*.js'];
 
-var watch = require('./semantic/tasks/watch'),
-    build = require('./semantic/tasks/build');
-
 gulp.task('jsStyle', function() {
   return gulp.src(jsPaths)
     .pipe(jscs())
@@ -29,5 +26,3 @@ gulp.task('test', function() {
 
 gulp.task('default', ['jsLint', 'jsStyle']);
 
-gulp.task('watch ui', watch);
-gulp.task('build ui', build);

@@ -20,7 +20,7 @@ app.use('/', routes);
 app.use('/users', users);
 app.use('/admin', admin);
 
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
   console.error('***** Error: no such route exists *****');
   var err = new Error('Page Not Found');
   err.status = 404;
@@ -28,11 +28,11 @@ app.use(function (req, res, next) {
 });
 
 //may need to add parameter next if subsequent calls are required
-app.use(function (err, req, res) {
+app.use(function(err, req, res) {
   res.status(err.status || 500);
   res.render('error', {title: err.message, error: err});
 });
 
-app.listen(3000, function () {
+app.listen(3000, function() {
   console.log('Listening on port 3000 ...');
 });

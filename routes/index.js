@@ -13,17 +13,10 @@ router.get('/login', function (req, res) {
   else res.render('login');
 });
 
-// router.post('/login', passport.authenticate('local'), function (req, res) {
-//   res.redirect('/');
-// });
-
 router.post('/login', function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) return next(err);
-    if (!user) {
-      console.log('Unauthorized');
-      return res.redirect('/login', { message: 'Login unsuccessful' });
-    }
+    if (!user) return res.render('login', { message: info.message });
     req.login(user, function (err) {
       if (err) return next(err);
       return res.redirect('/')
@@ -38,16 +31,14 @@ router.get('/register', function (req, res) {
 
 router.post('/register', function (req, res) {
   Account.register(new Account({ username: req.body.username }), req.body.password, function (error, account) {
-    if (error) return res.render('register', { message: 'The requested User Name is not available' });
-    console.log('new Account: ', new Account({ username: req.body.username }));
-    console.log('new account created: ', account);
+    if (error) return res.render('register', { message: error.message });
     passport.authenticate('local')(req, res, function () {
       res.redirect('/');
     });
   });
 });
 
-router.get('logout', function (req, res) {
+router.get('/logout', function (req, res) {
   if (req.user) req.logout();
   res.redirect('/');
 });

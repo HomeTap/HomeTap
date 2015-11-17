@@ -11,7 +11,6 @@ mongoose.connection.on('error', function(err){
 });
 
 describe('Test Database Schema', function() {
-  var Beer = require('../models/beer.js');
 
   before('Connect to Database', function(done){
     db = mongoose.connect(dbURI);
@@ -23,9 +22,9 @@ describe('Test Database Schema', function() {
   });
 
   describe('Test Beer Schema', function() {
+    var Beer = require('../models/beer.js');
 
     it('It should save a beer', function(done){
-      var Beer = require('../models/beer.js');
       var lager = new Beer({
         name: 'Yummy',
         categoryId: 17,
@@ -50,6 +49,41 @@ describe('Test Database Schema', function() {
         beers.forEach(function(beer){
           beer.remove();
           if(!!beers.length) done();
+        });
+      });
+    });
+  });
+
+  describe('Test Account Schema', function() {
+    var Account = require('../models/account.js');
+
+    it('It should save a fake account', function(done){
+      var newGuy = new Account({
+        username: 'happyman',
+        screeName: 'drinkAllDaBeerz',
+        isAdmin: false,
+        queue: [],
+        favorites: [],
+        subscription: 64
+      });
+
+      newGuy.save(done);
+    });
+
+    it('should find the Account it saved', function(done){
+
+      Account.find({username: 'happyman'}, function(err, accounts){
+        expect(err).to.not.be.ok;
+        expect(accounts.length).to.equal(1);
+        done();
+      });
+    });
+
+    it('should remove fake account', function(done){
+      Account.find({username: 'happyman'}, function(err, accounts){
+        accounts.forEach(function(account){
+          account.remove();
+          if(!!accounts.length) done();
         });
       });
     });

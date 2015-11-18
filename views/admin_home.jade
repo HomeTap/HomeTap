@@ -16,9 +16,7 @@ block content
         a(href='/admin/beers')
           button(type='button') Manage Beer Listings
       div.form
-        form(method='GET', action='/user')    
-        p User Name / Next Beer Name / button(type='button') Send Beer
-        p User Name / Next Beer Name / button(type='button') Send Beer
-        p User Name / Next Beer Name / button(type='button') Send Beer
+        -each User in Users
+          p #{User.screenName} #{User.queue[0]}
 
  

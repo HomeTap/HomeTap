@@ -14,8 +14,9 @@ block content
         input(type='text', name='name', placeholder='Beer Name')
       p Category
         select(name='categoryId', placeholder='Category')
-          each cat, i in cats
-            option(value=i) #{cat}
+          option(value='', selected='selected')
+            each cat, i in cats
+              option(value=cat._id) #{cat}
       p Description
         input(type='text', name='description', placeholder='Descripton')
       p Rating

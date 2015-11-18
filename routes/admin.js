@@ -23,11 +23,15 @@ router.post('/beers', function(req, res) {
     stars: req.body.stars
   });
   newBeer.save(function(err) {
-    if(err)
-    console.log(err);
+    if(err) throw err,
+      console.log('is it working?');
+    Category.find({}, function(err, categories){
+    Beer.find({}, function(err, beers) {
+      if(err) throw err;
+      res.render('admin_lib', {cats: categories, categorylist: categories, beerlist: beers});
+    });
   });
-  res.send('hey');
-  // res.render('admin_lib');
+  });
 });
 
 router.put('/beers/:id', function(req,res) {

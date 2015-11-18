@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  if (!user)
+    p
+      a(href='/login') Login
+    p
+      a(href='/register') Register
+  else
+    h1 Welcome to HomeTap
+    p Current user: #{user.username}
+    a(href='/logout') Logout

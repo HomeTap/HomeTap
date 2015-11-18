@@ -4,6 +4,7 @@
   "description": "Application for users to browse a library of beers, add them to a queue, and receive deliveries from local breweries.",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

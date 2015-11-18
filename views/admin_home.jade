@@ -15,8 +15,10 @@ block content
       .button
         a(href='/admin/beers')
           button(type='button') Manage Beer Listings
-      p User Name / Next Beer Name / Button
-      p User Name / Next Beer Name / Button
-      p User Name / Next Beer Name / Button
+      div.form
+        form(method='GET', action='/user')    
+        p User Name / Next Beer Name / button(type='button') Send Beer
+        p User Name / Next Beer Name / button(type='button') Send Beer
+        p User Name / Next Beer Name / button(type='button') Send Beer
 
  

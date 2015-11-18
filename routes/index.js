@@ -16,10 +16,11 @@ router.get('/login', function (req, res) {
 router.post('/login', function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) return next(err);
-    if (!user) return res.render('login', { message: info.message });
+    if (!user) return res.
+      render('login', { message: info.message });
     req.login(user, function (err) {
       if (err) return next(err);
-      return res.redirect('/')
+      return res.redirect('/admin/home');
     });
   })(req, res, next);
 });

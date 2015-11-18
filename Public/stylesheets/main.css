@@ -27,8 +27,9 @@ h2 {
   padding: 20px;
 }
 
-div {
-  
+div.button {
+  text-align: center;
+  background-color: 
 }
 
 /* Header */
@@ -42,6 +43,10 @@ header {
   border-bottom: 5px solid #7F482B;
 }
 
+body {
+  background-color: #FFE3CD;
+  color: #7F2400;
+}
 
 /* Footer */
 
@@ -53,9 +58,7 @@ footer {
   color: #7F2400;
 }
 
-/* Color */
 
-body {
-  background-color: #FFE3CD;
+a {
   color: #7F2400;
 }

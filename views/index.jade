@@ -1,12 +1,25 @@
 extends layout
 
 block content
+  header
+    h1 Welcome to Home Tap
   if (!user)
     p
       a(href='/login') Login
     p
       a(href='/register') Register
   else
-    h1 Welcome to HomeTap
+    nav
+      ul
+        li Browse New Beer
+        li Ready For Beer
+    .queue
+      each beer in user.queue
+        div
+          span(title=beer.description) #{beer.name} (#{beer.category})
+          span beer.stars
+          a(href='/')
+            button(type='button') Remove
+          
     p Current user: #{user.username}
     a(href='/logout') Logout

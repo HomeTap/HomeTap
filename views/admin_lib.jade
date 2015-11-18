@@ -8,7 +8,7 @@ block content
     p Add New Beer
 
   div.form
-    form(method='Post', action='/user')
+    form(method='POST', action='/user')
       input(type='hidden', name='_method', value='PUT')
       p Beer Name
         input(type='text', name='name', placeholder='Beer Name')

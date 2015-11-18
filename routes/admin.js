@@ -1,32 +1,29 @@
 var express = require('express'),
-    mongoose = require('mongoose'),
-    dbURI = 'mongodb://hometapadminp:HomeTap2015@ds051943.mongolab.com:51943/hometap';
+    mongoose = require('mongoose');
 
 var router = express.Router();
 var Beer = require('../models/beer');
 var Category = require('../models/categories');
 var User = require('../models/user');
 
-mongoose.connect(dbURI);
-
 router.get('/beers', function(req, res) {
 Category.find({}, function(err, categories){
     Beer.find({}, function(err, beers) {
       if(err) throw err;
-      res.render('admin_lib', {categorylist: categories, beerlist: beers});
+      res.render('admin_lib', {cats: categories, categorylist: categories, beerlist: beers});
     });
   });
 });
 
 router.post('/beers', function(req, res) {
-  var newBeer = new Beer();
-  newBeer.save({
+  var newBeer = new Beer({
     name: req.body.name,
     categoryId: req.body.categoryId,
     description: req.body.description,
     stars: req.body.stars
-  }, function(err) {
-    if(err) throw err;
+  });
+  newBeer.save(function(err) {
+    if(err)
     console.log(err);
   });
   res.send('hey');

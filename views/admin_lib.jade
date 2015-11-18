@@ -13,7 +13,9 @@ block content
       p Beer Name
         input(type='text', name='name', placeholder='Beer Name')
       p Category
-        input(type='number', name='categoryId', placeholder='Category')
+        select(name='categoryId', placeholder='Category')
+          each cat, i in cats
+            option(value=i) #{cat}
       p Description
         input(type='text', name='description', placeholder='Descripton')
       p Rating
@@ -24,7 +26,7 @@ block content
   div.categorylist
     .left
     - each category in categorylist
-      p #{category.name}
+      p #{category}
 
   div.beerlist
     .right

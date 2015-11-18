@@ -57,7 +57,7 @@ router.get('/home', function(req, res) {
   User.find({}, function(err, users){
   if(err) throw err;
     // var NextBeerName = queue[0];
-  res.render('admin_home', {Users});
+  res.render('admin_home', {Users: users});
   });
 });
 

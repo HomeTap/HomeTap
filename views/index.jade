@@ -16,8 +16,8 @@ block content
     .queue
       each beer in user.queue
         div
-          span(title=beer.description) #{beer.name} (#{beer.category})
-          span beer.stars
+          span(title=beer.description) #{beer.name} (Category: #{beer.category}) (Stars: #{beer.stars})
+          &nbsp;&nbsp;
           a(href='/')
             button(type='button') Remove
           

@@ -19,30 +19,24 @@ router.get('/', function (req, res) {
         results.forEach(function(element) {
           categories[element._doc._id.toString()] = element._doc.category;
         });
-        console.log('categories: ', categories);
 
         Beer.find({ _id: { $in: result.queue } }, function(error, results) {
           if (error) console.error(error);
           results.forEach(function(element, index) {
-            console.log('element: ', element);
-            // console.log('Object.keys(element): ', Object.keys(element));
-            console.log('element._doc: ', element._doc);
-            // console.log('results[index]: ', results[index]);
-            // console.log('element._id: ', element._id.toString());
-            // console.log('element._doc._id: ', element._doc._id.toString());
-            // console.log('element._id: ', typeof element._id.toString());
-            // console.log('element._doc._id: ', typeof element._doc._id.toString());
-            // console.log('categories[element._id]: ', categories[element._id.toString()]);
-            // console.log('categories[element._doc._id]: ', categories[element._doc._id.toString()]);
-            // results[index].category = categories[element._id];
+            results[index].category = categories[element._doc.categoryIdString];
+            results[index]._doc.category = categories[element._doc.categoryIdString];
           });
-          // console.log('results: ', results);
           result.queue = results;
 
           Beer.find({ _id: { $in: result.favorites } }, function(error, results) {
             if (error) console.error(error);
+            results.forEach(function(element, index) {
+              results[index].category = categories[element._doc.categoryIdString];
+              results[index]._doc.category = categories[element._doc.categoryIdString];
+            });
             result.favorites = results;
 
+            console.log('user: ', result);
             res.render('index', { title: 'HomeTap', user: result });
           });
         });

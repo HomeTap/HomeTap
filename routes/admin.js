@@ -1,18 +1,51 @@
-var express = require('express');
+var express = require('express'),
+    mongoose = require('mongoose');
+
 var router = express.Router();
 
+var dbURI = require('./config').dbURI;
+var db = mongoose.createConnection(dbURI);
+//how to load schema on separate connection
+
+var Beer = require('../models/beer');
+var Order = require('../models/order');
+
 router.get('/beers', function(req, res) {
-  res.send(200, 'Beers for everyone');
+  res.render('adminBeersPage');
 });
 
 router.post('/beers', function(req, res) {
   var input = req.body;
-  res.status(200).send(input);
-  // input.save();
+  new Beer.save(input);
+  res.render('adminBeersPage');
 });
 
-router.put('/beers', function(req,res) {
+router.put('/beers/:id', function(req,res) {
+  var input = req.body;
+  // for attribute in input
+    // check if it is different that the existing resource
+    // change all elements that are different but don't change things that are not
+  res.render('adminBeersPage');
+});
 
+router.delete('/beers/:id', function(req, res) {
+  Beer.find({_id: req.url.params}, function(err, beer) {
+    if(err) throw err;
+    beer.remove();
+    res.render('adminBeersPage');
+  });
+});
+
+router.get('/home', function(req, res) {
+  res.render('adminHomePage');
+});
+
+router.post('/home/:id', function(req, res) {
+  Order.find({_id: req.url.params}, function(err, order){
+    if(err) throw err;
+    order.remove();
+    res.render('adminHomePage');
+  });
 });
 
 module.exports = router;

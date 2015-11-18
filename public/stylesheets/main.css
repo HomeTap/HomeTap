@@ -32,6 +32,18 @@ div.button {
   background-color: 
 }
 
+div.newbeer {
+  text-align: center;
+  background-color: #CC9210;
+  border: 5px solid #7F482B;
+  margin: 30px;
+}
+
+div.form {
+  text-align: center;
+  margin: 30px;
+}
+
 /* Header */
 
 header {

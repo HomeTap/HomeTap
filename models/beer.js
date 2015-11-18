@@ -1,13 +1,14 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
 
-var accountSchema = new Schema({
+var beerSchema = new Schema({
   name: String,
-  categoryId: Number,
+  categoryId: ObjectId,
   description: String,
   stars: Number
 });
 
-var Beer = mongoose.model('Beer', accountSchema);
+var Beer = mongoose.model('Beer', beerSchema);
 
 module.exports = Beer;

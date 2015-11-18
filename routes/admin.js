@@ -2,18 +2,24 @@ var express = require('express'),
     mongoose = require('mongoose');
 
 var router = express.Router();
-
+var db = mongoose.createConnection(require('../config').dbURI);
 var Beer = require('../models/beer');
+
+// var Beer = require('../models/beer');
 var User = require('../models/user');
 
 router.get('/beers', function(req, res) {
-  res.render('admin_lib');
+    Beer.find({}, function(err, beers) {
+      if(err) throw err;
+      res.render('admin_lib', {beerlist: beers});
+    });
 });
 
 router.post('/beers', function(req, res) {
   var input = req.body;
-  new Beer.save(input);
-  res.render('admin_lib');
+  res.send(input);
+  // new Beer.save(input);
+  // res.render('admin_lib');
 });
 
 router.put('/beers/:id', function(req,res) {

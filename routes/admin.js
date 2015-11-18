@@ -2,17 +2,17 @@ var express = require('express'),
     mongoose = require('mongoose');
 
 var router = express.Router();
-var db = mongoose.createConnection(require('../config').dbURI);
 var Beer = require('../models/beer');
-
-// var Beer = require('../models/beer');
+var Category = require('../models/categories');
 var User = require('../models/user');
 
 router.get('/beers', function(req, res) {
+Category.find({}, function(err, categories){
     Beer.find({}, function(err, beers) {
       if(err) throw err;
-      res.render('admin_lib', {categorylist: beers, beerlist: beers});
+      res.render('admin_lib', {categorylist: categories, beerlist: beers});
     });
+  });
 });
 
 router.post('/beers', function(req, res) {

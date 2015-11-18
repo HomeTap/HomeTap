@@ -51,6 +51,23 @@ router.post('/home/:id', function(req, res) {
     order.remove();
     res.render('admin_home');
   });
+
+router.get('/user', function(req, res) {
+  User.find({}, function(err, users){
+  if(err) throw err;
+    // var NextBeerName = queue[0];
+  res.render('admin_home', {Users});
+});
+
+router.post('/user/:id', function(req, res) {
+  User.find({_id: req.params.id}, function(err, queue){
+  if(err) throw err;
+    // var NextBeerName = queue[0];
+  res.render('admin_home');
+}); 
+
+
+
 });
 
 module.exports = router;

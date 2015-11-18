@@ -1,10 +1,13 @@
 var express = require('express'),
-    mongoose = require('mongoose');
+    mongoose = require('mongoose'),
+    dbURI = 'mongodb://hometapadminp:HomeTap2015@ds051943.mongolab.com:51943/hometap';
 
 var router = express.Router();
 var Beer = require('../models/beer');
 var Category = require('../models/categories');
 var User = require('../models/user');
+
+mongoose.connect(dbURI);
 
 router.get('/beers', function(req, res) {
 Category.find({}, function(err, categories){
@@ -16,9 +19,17 @@ Category.find({}, function(err, categories){
 });
 
 router.post('/beers', function(req, res) {
-  var input = req.body;
-  res.send(input);
-  // new Beer.save(input);
+  var newBeer = new Beer();
+  newBeer.save({
+    name: req.body.name,
+    categoryId: req.body.categoryId,
+    description: req.body.description,
+    stars: req.body.stars
+  }, function(err) {
+    if(err) throw err;
+    console.log(err);
+  });
+  res.send('hey');
   // res.render('admin_lib');
 });
 

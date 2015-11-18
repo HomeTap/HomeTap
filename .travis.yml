@@ -3,4 +3,10 @@ node_js:
   - "4.1"
 before_scrpt: 
   - npm install
+services:
+ - mongodb
 script: gulp
+
+cache:
+  directories:
+    - node_modules

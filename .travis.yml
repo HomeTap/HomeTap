@@ -2,5 +2,11 @@ language: node_js
 node_js:
   - "4.1"
 before_scrpt: 
-  - npm install
+  - npm install gulp
+services:
+ - mongodb
 script: gulp
+
+cache:
+  directories:
+    - node_modules

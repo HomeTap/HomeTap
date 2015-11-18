@@ -25,7 +25,7 @@ describe('Test Authentication', function() {
       .then(function(res) {
         console.log(res);
         expect(res).to.have.cookie('sessionid');
-        done()
+        done();
         // return admin.get('/admin/beers')
         //   .then(function(res) {
         //     expect(res).to.have.status(200);

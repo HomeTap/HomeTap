@@ -3,12 +3,7 @@ var express = require('express'),
 
 var router = express.Router();
 
-var dbURI = require('./config').dbURI;
-var db = mongoose.createConnection(dbURI);
-//how to load schema on separate connection
-
 var Beer = require('../models/beer');
-var Order = require('../models/order');
 
 router.get('/beers', function(req, res) {
   res.render('adminBeersPage');
@@ -41,7 +36,7 @@ router.get('/home', function(req, res) {
 });
 
 router.post('/home/:id', function(req, res) {
-  Order.find({_id: req.url.params}, function(err, order){
+  User.find({_id: req.url.params}, function(err, order){
     if(err) throw err;
     order.remove();
     res.render('adminHomePage');

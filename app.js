@@ -38,7 +38,6 @@ app.use(passport.session());
 
 function ensureAuthenticated (req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  // res.redirect('/');
   var err = new Error('Unauthorized');
   err.status = 401;
   next(err);

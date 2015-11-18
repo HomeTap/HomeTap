@@ -28,6 +28,7 @@ p {
   font size: 20px;
   text-align: left;
   padding: 20px;
+  float: left;
   border: 5px solid #7F482B;
 }
 
@@ -35,6 +36,7 @@ p {
   margin: 0 0 0 250px;
   font size: 50px;
   text-align: center;
+  float: left;
   padding: 20px;
 }
 

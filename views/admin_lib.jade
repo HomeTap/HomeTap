@@ -24,14 +24,12 @@ block content
   div.categorylist
     .left
     - each category in categorylist
-      li.category
-        p #{category.name}
+      p #{category.name}
 
   div.beerlist
     .right
     - each beer in beerlist
-      li.beer
-        p #{beer.name}  #{beer.stars} 
-        p #{beer.description}
+      p #{beer.name}  #{beer.stars} 
+      p #{beer.description}
 
 

@@ -1,15 +1,16 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var ObjectId = Schema.Types.ObjectId;
 
-var accountSchema = new Schema({
-  username: String,
+var userSchema = new Schema({
+  userId: ObjectId,
   screenName: String,
   isAdmin: Boolean,
-  queue: Array,
-  favorites: Array,
+  queue: [ObjectId],
+  favorites: [ObjectId],
   subscription: String
 });
 
-var User = mongoose.model('User', accountSchema);
+var User = mongoose.model('User', userSchema);
 
 module.exports = User;

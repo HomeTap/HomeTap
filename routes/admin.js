@@ -4,6 +4,7 @@ var express = require('express'),
 var router = express.Router();
 
 var Beer = require('../models/beer');
+var User = require('../models/user');
 
 router.get('/beers', function(req, res) {
   res.render('adminBeersPage');

@@ -1,0 +1,98 @@
+html {
+  font-family: 'Maven Pro', sans-serif;
+}
+
+h1 {
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+h2 {
+  margin: 0;
+  font size: 60px;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+
+p {
+  margin: 10px;
+  padding: 5px;
+}
+
+.left {
+  margin: 60px 820px 0 0;
+  font size: 20px;
+  text-align: left;
+  padding: 20px;
+  float: left;
+  border: 5px solid #7F482B;
+}
+
+.right {
+  margin: 0 0 0 250px;
+  font size: 50px;
+  text-align: center;
+  float: left;
+  padding: 20px;
+}
+
+/*div {
+  border: 5px solid #7F482B;
+}*/
+
+div.button {
+  text-align: center;
+  background-color: 
+}
+
+div.newbeer {
+  text-align: center;
+  background-color: #CC9210;
+  border: 5px solid #7F482B;
+  margin: 30px 200px;
+}
+
+div.form {
+  text-align: left;
+  margin: 50px 0 0 450px;
+}
+
+div.login {
+  text-align: left;
+  margin: 50px 0 0 380px;
+}
+
+/* Header */
+
+header {
+  padding: 5px 15px;
+	margin: 0 0 15px 0;
+	width: 100%;
+	background: #FF7800;
+  border-color: #FF7800;
+  border-bottom: 5px solid #7F482B;
+}
+
+body {
+  background-color: #FFE3CD;
+  color: #7F2400;
+}
+
+/* Footer */
+
+footer {
+  width: 100%;
+  font-size: 15px;
+  text-align: center;
+  padding: 20px;
+  color: #7F2400;
+}
+
+
+a {
+  color: #7F2400;
+}

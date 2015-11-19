@@ -9,7 +9,18 @@ block content
     p
       a(href='/register') Register
   else
-    h1 Welcome to HomeTap
+    nav
+      ul
+        li Browse New Beer
+        li Ready For Beer
+    .queue
+      each beer in user.queue
+        div
+          span(title=beer.description) #{beer.name} (Category: #{beer.category}) (Stars: #{beer.stars})
+          &nbsp;&nbsp;
+          a(href='/')
+            button(type='button') Remove
+          
     p Current user: #{user.username}
     a(href='/logout') Logout
     

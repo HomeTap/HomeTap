@@ -12,9 +12,9 @@ block content
   
   div
     .right
-      h2 Manage Beer Listings
-      p User Name / Next Beer Name / Button
-      p User Name / Next Beer Name / Button
-      p User Name / Next Beer Name / Button
-
- 
+      .button
+        a(href='/admin/beers')
+          button(type='button') Manage Beer Listings
+      div.form
+        each user in users
+          p #{user.screenName} #{user.queue[0]}

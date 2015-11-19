@@ -1,5 +1,4 @@
-var express = require('express'),
-    mongoose = require('mongoose');
+var express = require('express');
 
 var router = express.Router();
 var Beer = require('../models/beer');
@@ -34,16 +33,7 @@ router.post('/beers', function(req, res) {
   });
 });
 
-router.put('/beers/:id', function(req,res) {
-  var input = req.body;
-
-  Beer.find({_id: req.params.id}, function(err, beer) {
-    // for attribute in input
-      // check if it is different that the existing resource
-      // change all elements that are different but don't change things that are not
-  });
-  res.render('admin_lib');
-});
+//potentially edit beers
 
 router.delete('/beers/:id', function(req, res) {
   Beer.find({_id: req.params.id}, function(err, beer) {
@@ -54,10 +44,8 @@ router.delete('/beers/:id', function(req, res) {
 });
 
 router.get('/home', function(req, res) {
-<<<<<<< HEAD
   User.find({isAdmin: false}, function(err, users) {
     if(err) throw err;
-    // var NextBeerName = queue[0];
     res.render('admin_home', {users: users});
   });
 });
@@ -68,37 +56,6 @@ router.post('/home/:id', function(req, res) {
     order.remove();
     res.render('admin_home');
   });
-});
-
-router.get('/user', function(req, res) {
-  User.find({}, function(err, users) {
-    if(err) throw err;
-    // var NextBeerName = queue[0];
-    res.render('admin_home', {users: users});
-  });
-});
-
-router.post('/user/:id', function(req, res) {
-  User.find({_id: req.params.id}, function(err, queue) {
-    if(err) throw err;
-    // var NextBeerName = queue[0];
-    res.render('admin_home');
-  });
-=======
-  User.find({}, function(err, users){
-  if(err) throw err;
-    // var NextBeerName = queue[0];
-  res.render('admin_home', {userList: users});
-  });
-});
-
-router.post('/home/:id', function(req, res) {
-  User.find({_id: req.params.id}, function(err, queue){
-  if(err) throw err;
-    // var NextBeerName = queue[0];
-  res.render('admin_home');
-  }); 
->>>>>>> 72211fb22f948d0b4cc329062dbe9f504e40b3dc
 });
 
 module.exports = router;

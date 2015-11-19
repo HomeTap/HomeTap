@@ -3,14 +3,14 @@ var passport = require('passport');
 
 var Account = require('../models/account');
 var User = require('../models/user');
-var Category = require('../models/categories');
+var Category = require('../models/category');
 var Beer = require('../models/beer');
 var router = express.Router();
 
 router.get('/', function (req, res) {
   if (req.user) {
     var categories = {};
-    User.findOne({ userId: req.user._id }, function(error, result) {
+    User.findOne({ userIdString: req.user._id }, function(error, result) {
       if (error) console.error(error);
       result = result._doc;
       result.username = req.user.username;
@@ -58,9 +58,9 @@ router.post('/login', function (req, res, next) {
       render('login', { message: info.message });
     req.login(user, function (err) {
       if (err) return next(err);
-      User.findOne({ userId: req.user._id }, function(error, result) {
+      User.findOne({ userIdString: req.user._id }, function(error, result) {
         if (error) console.error(error);
-        if (result.isAdmin) return res.redirect('/admin/home');
+        if (result.isAdmin) return res.redirect('/admin');
         else return res.redirect('/');
       });
     });
@@ -76,7 +76,18 @@ router.post('/register', function (req, res) {
   Account.register(new Account({ username: req.body.username }), req.body.password, function (error) {
     if (error) return res.render('register', { message: error.message });
     passport.authenticate('local')(req, res, function () {
-      res.redirect('/');
+      var newUser = new User({
+        screenName: req.body.screenName,
+        isAdmin: false,
+        queue: [],
+        favorites: [],
+        subscription: req.body.subscription,
+        userIdString: req.user._id.toString()
+      });
+      newUser.save(function(err){
+        if (err) throw err;
+        res.redirect('/');
+      });
     });
   });
 });

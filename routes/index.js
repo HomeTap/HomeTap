@@ -9,45 +9,22 @@ var router = express.Router();
 
 router.get('/', function (req, res) {
   if (req.user) {
-    var categories = {};
     User.findOne({ userIdString: req.user._id }, function(error, result) {
-      if (error) console.error(error);
-      result = result._doc;
-      result.username = req.user.username;
-
-      Category.find({}, function(error, results) {
-        if (error) console.error(error);
-        results.forEach(function(element) {
-          categories[element._doc._id.toString()] = element._doc.category;
-        });
-
-        Beer.find({ _id: { $in: result.queue } }, function(error, results) {
-          if (error) console.error(error);
-          results.forEach(function(element, index) {
-            results[index].category = categories[element._doc.categoryIdString];
-            results[index]._doc.category = categories[element._doc.categoryIdString];
-          });
-          result.queue = results;
-
-          Beer.find({ _id: { $in: result.favorites } }, function(error, results) {
-            if (error) console.error(error);
-            results.forEach(function(element, index) {
-              results[index].category = categories[element._doc.categoryIdString];
-              results[index]._doc.category = categories[element._doc.categoryIdString];
-            });
-            result.favorites = results;
-
-            console.log('user: ', result);
-            res.render('index', { title: 'HomeTap', user: result });
-          });
-        });
-      });
+      if (error) throw error;
+      if (result.isAdmin) return res.redirect('/admin');
+      else return res.redirect('/user');
     });
   } else res.render('index', { title: 'HomeTap', user: req.user });
 });
 
 router.get('/login', function (req, res) {
-  if (req.user) res.redirect('/');
+  if (req.user) {
+    User.findOne({ userIdString: req.user._id }, function(error, result) {
+      if (error) throw error;
+      if (result.isAdmin) return res.redirect('/admin');
+      else return res.redirect('/user');
+    });
+  }
   else res.render('login');
 });
 
@@ -59,16 +36,22 @@ router.post('/login', function (req, res, next) {
     req.login(user, function (err) {
       if (err) return next(err);
       User.findOne({ userIdString: req.user._id }, function(error, result) {
-        if (error) console.error(error);
+        if (error) throw error;
         if (result.isAdmin) return res.redirect('/admin');
-        else return res.redirect('/');
+        else return res.redirect('/user');
       });
     });
   })(req, res, next);
 });
 
 router.get('/register', function (req, res) {
-  if (req.user) res.redirect('/');
+  if (req.user) {
+    User.findOne({ userIdString: req.user._id }, function(error, result) {
+      if (error) throw error;
+      if (result.isAdmin) return res.redirect('/admin');
+      else return res.redirect('/user');
+    });
+  }
   else res.render('register');
 });
 
@@ -86,7 +69,7 @@ router.post('/register', function (req, res) {
       });
       newUser.save(function(err){
         if (err) throw err;
-        res.redirect('/');
+        res.redirect('/user');
       });
     });
   });

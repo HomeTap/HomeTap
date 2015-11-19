@@ -17,7 +17,7 @@ block content
       p #{beer.name} 
         button(class='addToQueue', type='button')
         &nbsp;&nbsp;
-        button(class='favoriteButton', data-id='#{beer.id}', type='button') Favorite
+        button(class='favoriteButton', data-fav='#{beer.favorite}', type='button') Favorite
 
   script(type='text/javascript', src='javascript/userlib.js')
 

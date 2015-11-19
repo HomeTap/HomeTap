@@ -46,7 +46,7 @@ router.delete('/beers/:id', function(req, res) {
 router.get('/home', function(req, res) {
   User.find({isAdmin: false}, function(err, users) {
     if(err) throw err;
-    res.render('admin_home', {users: users});
+    res.render('admin_home', {userList: users});
   });
 });
 

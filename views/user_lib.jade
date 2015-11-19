@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  header
+    h1 Home Tap
+
+  div.categorylist
+    .left
+    ul
+      each category, index in categorylist
+        li
+          a(href='/user/beers/category/#{index}') #{category}
+
+  div.beerlist
+    .right
+    each beer in beerlist
+      p #{beer.name} 
+        button(class='addToQueue', type='button')
+        &nbsp;&nbsp;
+        button(class='favoriteButton', data-id='#{beer.id}', type='button') Favorite
+
+  script(type='text/javascript', src='javascript/userlib.js')
+
+

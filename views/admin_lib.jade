@@ -1,1 +1,37 @@
 extends layout
+
+block content
+  header
+    h1 Home Tap
+
+  div.newbeer
+    p Add New Beer
+
+  div.form
+    form(method='POST', action='/user')
+      input(type='hidden', name='_method', value='add')
+      p Beer Name
+        input(type='text', name='name', placeholder='Beer Name')
+      p Category
+        input(type='number', name='categoryId', placeholder='Category')
+      p Description
+        input(type='text', name='description', placeholder='Descripton')
+      p Rating
+        input(type='number', name='stars', placeholder='Stars')
+      p Add Beer
+        input(type='submit', name='Add Beer')
+
+  div.categorylist
+    .left
+    - each category in categorylist
+      li.category
+        p #{category.name}
+
+  div.beerlist
+    .right
+    - each beer in beerlist
+      li.beer
+        p #{beer.name}  #{beer.stars} 
+        p #{beer.description}
+
+

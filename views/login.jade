@@ -1,19 +1,23 @@
 extends layout
 
 block content
-  h1 Login Page
-  form(action='/login' method='POST')
-    label(for='username') Enter User Name
-    &nbsp;&nbsp;
-    input(type='text' name='username' placeholder='User Name')
-    br
-    label(for='password') Enter Password
-    &nbsp;&nbsp;
-    input(type='text' name='password' placeholder='Password')
-    br
-    button(type='submit') Log In
-    &nbsp;&nbsp;
-    a(href='/')
-      button(type='button') Cancel
+  header
+    h1 Home Tap
+  h2 Login Page
+  div
+    .login
+      form(action='/login' method='POST')
+        label(for='username') Enter User Name
+        &nbsp;&nbsp;
+        input(type='text' name='username' placeholder='User Name')
+        br
+        label(for='password') Enter Password
+        &nbsp;&nbsp;
+        input(type='text' name='password' placeholder='Password')
+        br
+        button(type='submit') Log In
+        &nbsp;&nbsp;
+        a(href='/')
+          button(type='button') Cancel
 
-    p #{message}
+        p #{message}

@@ -12,6 +12,7 @@ router.get('/', function (req, res) {
     var categories = {};
     User.findOne({ userId: req.user._id }, function(error, result) {
       if (error) console.error(error);
+      result = result._doc;
       result.username = req.user.username;
 
       Category.find({}, function(error, results) {
@@ -53,10 +54,15 @@ router.get('/login', function (req, res) {
 router.post('/login', function (req, res, next) {
   passport.authenticate('local', function (err, user, info) {
     if (err) return next(err);
-    if (!user) return res.render('login', { message: info.message });
+    if (!user) return res.
+      render('login', { message: info.message });
     req.login(user, function (err) {
       if (err) return next(err);
-      return res.redirect('/');
+      User.findOne({ userId: req.user._id }, function(error, result) {
+        if (error) console.error(error);
+        if (result.isAdmin) return res.redirect('/admin/home');
+        else return res.redirect('/');
+      });
     });
   })(req, res, next);
 });

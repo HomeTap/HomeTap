@@ -2,7 +2,7 @@ extends layout
 
 block content
   header
-    h1 Welcome to Home Tap
+    h1 Home Tap
   if (!user)
     p
       a(href='/login') Login
@@ -23,3 +23,4 @@ block content
           
     p Current user: #{user.username}
     a(href='/logout') Logout
+    

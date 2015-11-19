@@ -12,6 +12,7 @@ Category.find({}, function(err, categories){
       if(err) throw err;
       res.render('admin_lib', {cats: categories, categorylist: categories, beerlist: beers});
     });
+
   });
 });
 
@@ -53,6 +54,37 @@ router.delete('/beers/:id', function(req, res) {
 });
 
 router.get('/home', function(req, res) {
+<<<<<<< HEAD
+  User.find({isAdmin: false}, function(err, users) {
+    if(err) throw err;
+    // var NextBeerName = queue[0];
+    res.render('admin_home', {users: users});
+  });
+});
+
+router.post('/home/:id', function(req, res) {
+  User.find({_id: req.params.id}, function(err, order) {
+    if(err) throw err;
+    order.remove();
+    res.render('admin_home');
+  });
+});
+
+router.get('/user', function(req, res) {
+  User.find({}, function(err, users) {
+    if(err) throw err;
+    // var NextBeerName = queue[0];
+    res.render('admin_home', {users: users});
+  });
+});
+
+router.post('/user/:id', function(req, res) {
+  User.find({_id: req.params.id}, function(err, queue) {
+    if(err) throw err;
+    // var NextBeerName = queue[0];
+    res.render('admin_home');
+  });
+=======
   User.find({}, function(err, users){
   if(err) throw err;
     // var NextBeerName = queue[0];
@@ -66,6 +98,7 @@ router.post('/home/:id', function(req, res) {
     // var NextBeerName = queue[0];
   res.render('admin_home');
   }); 
+>>>>>>> 72211fb22f948d0b4cc329062dbe9f504e40b3dc
 });
 
 module.exports = router;

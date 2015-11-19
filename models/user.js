@@ -8,7 +8,8 @@ var userSchema = new Schema({
   isAdmin: Boolean,
   queue: [ObjectId],
   favorites: [ObjectId],
-  subscription: String
+  subscription: String,
+  userIdString: String
 });
 
 var User = mongoose.model('User', userSchema);

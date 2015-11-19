@@ -43,12 +43,71 @@ router.get('/', function (req, res) {
 });
 
 router.get('/beers', function (req, res){
-  Category.find({}, function(err, categories){
-      Beer.find({}, function(err, beers) {
-        if(err) throw err;
-        res.render('user_lib', {cats: categories, categorylist: categories, beerlist: beers});
+  User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
+    var favs  = result.favorites;
+    var categories = {};
+
+    Category.find({}, function(error, results){
+      var firstCategoryId = results[0]._id;
+      results.forEach(function(element) {
+        categories[element._doc._id.toString()] = element._doc.category;
+      });
+
+      if(error) throw error;
+      Beer.find({categoryId: firstCategoryId}).lean().exec(function(error, beers) {
+        var newBeers = beers.map(function(beer) {
+          beer.favorite = favs._id;
+          return beer;
+        });
+
+        if(error) throw error;
+        console.log(categories);
+        res.render('user_lib', {categorylist: categories, beerlist: newBeers});
       });
     });
+  });
+});
+
+router.get('/beers/category/:id', function(req, res) {
+  User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
+    var favs  = result.favorites;
+    var categories = {};
+
+    Category.find({}, function(error, results){
+      results.forEach(function(element) {
+        categories[element._doc._id.toString()] = element._doc.category;
+      });
+
+      if(error) throw error;
+      Beer.find({categoryId: req.params.id}).lean().exec(function(error, beers) {
+        var newBeers = beers.map(function(beer) {
+          beer.favorite = favs._id;
+          return beer;
+        });
+
+        if(error) throw error;
+        console.log(categories);
+        res.render('user_lib', {categorylist: categories, beerlist: newBeers});
+      });
+    });
+  });
+});
+
+router.put('/beers/favorite/:id', function(req, res) {
+  var categories = {};
+
+  Category.find({}, function(error, results){
+    results.forEach(function(element) {
+      categories[element._doc._id.toString()] = element._doc.category;
+    });
+
+    if(error) throw error;
+    Beer.find({categoryId: req.params.id}, function(error, beers) {
+      if(error) throw error;
+      console.log(categories);
+      res.render('user_lib', {categorylist: categories, beerlist: beers});
+    });
+  });
 });
 
 module.exports = router;

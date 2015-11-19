@@ -23,8 +23,7 @@ router.post('/beers', function(req, res) {
     stars: req.body.stars
   });
   newBeer.save(function(err) {
-    if(err) throw err,
-      console.log('is it working?');
+    if(err) throw err;
     Category.find({}, function(err, categories){
     Beer.find({}, function(err, beers) {
       if(err) throw err;

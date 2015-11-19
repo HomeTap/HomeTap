@@ -3,7 +3,7 @@ var passport = require('passport');
 
 var Account = require('../models/account');
 var User = require('../models/user');
-var Category = require('../models/category');
+var Category = require('../models/categories');
 var Beer = require('../models/beer');
 var router = express.Router();
 

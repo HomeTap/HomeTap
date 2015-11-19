@@ -9,10 +9,10 @@ var Beer = require('../models/beer');
 var User = require('../models/user');
 
 router.get('/beers', function(req, res) {
-    Beer.find({}, function(err, beers) {
-      if(err) throw err;
-      res.render('admin_lib', {beerlist: beers});
-    });
+  Beer.find({}, function(err, beers) {
+    if(err) throw err;
+    res.render('admin_lib', {beerlist: beers});
+  });
 });
 
 router.post('/beers', function(req, res) {
@@ -42,32 +42,35 @@ router.delete('/beers/:id', function(req, res) {
 });
 
 router.get('/home', function(req, res) {
-  res.render('admin_home');
+  User.find({isAdmin: false}, function(err, users) {
+    if(err) throw err;
+    // var NextBeerName = queue[0];
+    res.render('admin_home', {users: users});
+  });
 });
 
 router.post('/home/:id', function(req, res) {
-  User.find({_id: req.params.id}, function(err, order){
+  User.find({_id: req.params.id}, function(err, order) {
     if(err) throw err;
     order.remove();
     res.render('admin_home');
   });
+});
 
 router.get('/user', function(req, res) {
-  User.find({}, function(err, users){
-  if(err) throw err;
+  User.find({}, function(err, users) {
+    if(err) throw err;
     // var NextBeerName = queue[0];
-  res.render('admin_home', {Users});
+    res.render('admin_home', {users: users});
+  });
 });
 
 router.post('/user/:id', function(req, res) {
-  User.find({_id: req.params.id}, function(err, queue){
-  if(err) throw err;
+  User.find({_id: req.params.id}, function(err, queue) {
+    if(err) throw err;
     // var NextBeerName = queue[0];
-  res.render('admin_home');
-}); 
-
-
-
+    res.render('admin_home');
+  });
 });
 
 module.exports = router;

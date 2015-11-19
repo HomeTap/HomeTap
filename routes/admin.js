@@ -2,7 +2,7 @@ var express = require('express');
 
 var router = express.Router();
 var Beer = require('../models/beer');
-var Category = require('../models/categories');
+var Category = require('../models/category');
 var User = require('../models/user');
 
 router.get('/beers', function(req, res) {
@@ -43,14 +43,14 @@ router.delete('/beers/:id', function(req, res) {
   });
 });
 
-router.get('/home', function(req, res) {
+router.get('/', function(req, res) {
   User.find({isAdmin: false}, function(err, users) {
     if(err) throw err;
     res.render('admin_home', {userList: users});
   });
 });
 
-router.post('/home/:id', function(req, res) {
+router.post('/:id', function(req, res) {
   User.find({_id: req.params.id}, function(err, order) {
     if(err) throw err;
     order.remove();

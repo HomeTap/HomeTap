@@ -9,8 +9,9 @@ var logger = require('morgan');
 
 var dbURI = require('./config').dbURI;
 var Account = require('./models/account');
+var User = require('./models/user');
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 var admin = require('./routes/admin');
 var app = express();
 
@@ -36,16 +37,35 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-function ensureAuthenticated (req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
+function ensureAuthenticatedUser (req, res, next) {
+  if (req.isAuthenticated()) {
+    return User.findOne({userIdString: req.user._id}, function(error, result) {
+      if (error) throw error;
+      if (!result.isAdmin) {
+        return next();
+      }
+    });
+  }
+  var err = new Error('Unauthorized');
+  err.status = 401;
+  next(err);
+}
+
+function ensureAuthenticatedAdmin (req, res, next) {
+  if (req.isAuthenticated()) {
+    return User.findOne({userIdString: req.user._id}, function(error, result) {
+      if (error) throw error;
+      if (result.isAdmin) { return next(); }
+    });
+  }
   var err = new Error('Unauthorized');
   err.status = 401;
   next(err);
 }
 
 app.use('/', routes);
-app.use('/users', ensureAuthenticated, users);
-app.use('/admin', ensureAuthenticated, admin);
+app.use('/user', ensureAuthenticatedUser, user);
+app.use('/admin', ensureAuthenticatedAdmin, admin);
 
 app.use(function(req, res, next) {
   var err = new Error('Page Not Found');

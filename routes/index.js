@@ -3,51 +3,28 @@ var passport = require('passport');
 
 var Account = require('../models/account');
 var User = require('../models/user');
-var Category = require('../models/categories');
+var Category = require('../models/category');
 var Beer = require('../models/beer');
 var router = express.Router();
 
 router.get('/', function (req, res) {
   if (req.user) {
-    var categories = {};
-    User.findOne({ userId: req.user._id }, function(error, result) {
-      if (error) console.error(error);
-      result = result._doc;
-      result.username = req.user.username;
-
-      Category.find({}, function(error, results) {
-        if (error) console.error(error);
-        results.forEach(function(element) {
-          categories[element._doc._id.toString()] = element._doc.category;
-        });
-
-        Beer.find({ _id: { $in: result.queue } }, function(error, results) {
-          if (error) console.error(error);
-          results.forEach(function(element, index) {
-            results[index].category = categories[element._doc.categoryIdString];
-            results[index]._doc.category = categories[element._doc.categoryIdString];
-          });
-          result.queue = results;
-
-          Beer.find({ _id: { $in: result.favorites } }, function(error, results) {
-            if (error) console.error(error);
-            results.forEach(function(element, index) {
-              results[index].category = categories[element._doc.categoryIdString];
-              results[index]._doc.category = categories[element._doc.categoryIdString];
-            });
-            result.favorites = results;
-
-            console.log('user: ', result);
-            res.render('index', { title: 'HomeTap', user: result });
-          });
-        });
-      });
+    User.findOne({ userIdString: req.user._id }, function(error, result) {
+      if (error) throw error;
+      if (result.isAdmin) return res.redirect('/admin');
+      else return res.redirect('/user');
     });
   } else res.render('index', { title: 'HomeTap', user: req.user });
 });
 
 router.get('/login', function (req, res) {
-  if (req.user) res.redirect('/');
+  if (req.user) {
+    User.findOne({ userIdString: req.user._id }, function(error, result) {
+      if (error) throw error;
+      if (result.isAdmin) return res.redirect('/admin');
+      else return res.redirect('/user');
+    });
+  }
   else res.render('login');
 });
 
@@ -58,17 +35,23 @@ router.post('/login', function (req, res, next) {
       render('login', { message: info.message });
     req.login(user, function (err) {
       if (err) return next(err);
-      User.findOne({ userId: req.user._id }, function(error, result) {
-        if (error) console.error(error);
-        if (result.isAdmin) return res.redirect('/admin/home');
-        else return res.redirect('/');
+      User.findOne({ userIdString: req.user._id }, function(error, result) {
+        if (error) throw error;
+        if (result.isAdmin) return res.redirect('/admin');
+        else return res.redirect('/user');
       });
     });
   })(req, res, next);
 });
 
 router.get('/register', function (req, res) {
-  if (req.user) res.redirect('/');
+  if (req.user) {
+    User.findOne({ userIdString: req.user._id }, function(error, result) {
+      if (error) throw error;
+      if (result.isAdmin) return res.redirect('/admin');
+      else return res.redirect('/user');
+    });
+  }
   else res.render('register');
 });
 
@@ -76,7 +59,18 @@ router.post('/register', function (req, res) {
   Account.register(new Account({ username: req.body.username }), req.body.password, function (error) {
     if (error) return res.render('register', { message: error.message });
     passport.authenticate('local')(req, res, function () {
-      res.redirect('/');
+      var newUser = new User({
+        screenName: req.body.screenName,
+        isAdmin: false,
+        queue: [],
+        favorites: [],
+        subscription: req.body.subscription,
+        userIdString: req.user._id.toString()
+      });
+      newUser.save(function(err){
+        if (err) throw err;
+        res.redirect('/user');
+      });
     });
   });
 });

@@ -6,13 +6,23 @@ block content
   h2 Registration Page
   div.login  
     form(action='/register' method='POST')
-      label(for='username') Enter User Name
+      label(for='screenName') Enter Screen Name
       &nbsp;&nbsp;
-      input(type='text' name='username' placeholder='User Name')
+      input(type='text' name='screenName' placeholder='Screen Name')
+      br
+      label(for='username') Enter E-mail
+      &nbsp;&nbsp;
+      input(type='email' name='username' placeholder='E-mail')
       br
       label(for='password') Enter Password
       &nbsp;&nbsp;
       input(type='text' name='password' placeholder='Password')
+      
+      select(name='subscription')
+        option(value='' selected='selected')
+        option(value='64 Oz. Per Week') 64 Oz. Per Week
+        option(value='128 Oz. Per Week') 128 Oz. Per Week
+      
       br
       button(type='submit') Sign Up
       &nbsp;&nbsp;

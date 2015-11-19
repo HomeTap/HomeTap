@@ -32,7 +32,9 @@ block content
   div.beerlist
     .right
     - each beer in beerlist
-      p #{beer.name}  #{beer.stars} 
-      p #{beer.description}
+      p #{beer.name} 
+        form(method='DELETE', action='/admin/beers/{beer._id}')
+          input(type='submit', name='Remove')
+
 
 

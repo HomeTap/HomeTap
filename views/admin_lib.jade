@@ -8,12 +8,15 @@ block content
     p Add New Beer
 
   div.form
-    form(method='POST', action='/user')
+    form(method='POST', action='/admin/beers')
       input(type='hidden', name='_method', value='add')
       p Beer Name
         input(type='text', name='name', placeholder='Beer Name')
       p Category
-        input(type='number', name='categoryId', placeholder='Category')
+        select(name='categoryId', placeholder='Category')
+          option(value='', selected='selected')
+            each cat, i in cats
+              option(value=cat._id) #{cat}
       p Description
         input(type='text', name='description', placeholder='Descripton')
       p Rating
@@ -24,14 +27,12 @@ block content
   div.categorylist
     .left
     - each category in categorylist
-      li.category
-        p #{category.name}
+      p #{category}
 
   div.beerlist
     .right
     - each beer in beerlist
-      li.beer
-        p #{beer.name}  #{beer.stars} 
-        p #{beer.description}
+      p #{beer.name}  #{beer.stars} 
+      p #{beer.description}
 
 

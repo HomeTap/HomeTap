@@ -9,12 +9,13 @@ block content
     .left
       p User Queues
       p Settings
-  
+
   div
     .right
-      h2 Manage Beer Listings
-      p User Name / Next Beer Name / Button
-      p User Name / Next Beer Name / Button
-      p User Name / Next Beer Name / Button
+      .button
+        a(href='/admin/beers')
+          button(type='button') Manage Beer Listings
+      div.form
+        each user in userList
+          p #{user.screenName} #{user.queue[0]}
 
- 

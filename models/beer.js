@@ -6,7 +6,8 @@ var beerSchema = new Schema({
   name: String,
   categoryId: ObjectId,
   description: String,
-  stars: Number
+  stars: Number,
+  categoryIdString: String
 });
 
 var Beer = mongoose.model('Beer', beerSchema);

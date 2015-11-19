@@ -16,5 +16,5 @@ block content
         a(href='/admin/beers')
           button(type='button') Manage Beer Listings
       div.form
-        each user in users
+        - each user in userList
           p #{user.screenName} #{user.queue[0]}

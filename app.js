@@ -53,7 +53,7 @@ function ensureAuthenticatedUser (req, res, next) {
 
 function ensureAuthenticatedAdmin (req, res, next) {
   if (req.isAuthenticated()) {
-    User.findOne({userIdString: req.user._id}, function(error, result) {
+    return User.findOne({userIdString: req.user._id}, function(error, result) {
       if (error) throw error;
       if (result.isAdmin) { return next(); }
     });

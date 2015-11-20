@@ -15,10 +15,14 @@ block content
     .right
     each beer in beerlist
       p #{beer.name} 
-        button(class='addToQueue', type='button')
+        if (beer.favorite)
+          button(class='favoriteButton', data-id='#{beer._id}', type='button') Un-Favorite
+        else
+          button(class='favoriteButton', data-id='#{beer._id}', type='button') Favorite
         &nbsp;&nbsp;
-        button(class='favoriteButton', data-fav='#{beer.favorite}', type='button') Favorite
+        //- if (beer.queue)
+        //-   button(class='queueButton', data-id='#{beer._id}' type='button') Remove From Queue
+        //- else
+        //-   button(class='queueButton', data-id='#{beer._id}' type='button') Add To Queue
 
-  script(type='text/javascript', src='javascript/userlib.js')
-
-
+  script(type='text/javascript', src='/javascript/userlib.js')

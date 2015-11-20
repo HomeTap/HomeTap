@@ -103,6 +103,10 @@ router.put('/beers/favorite/:id', function(req, res) {
   });
 });
 
+router.get('/beers/favorite/:id', function(req, res) {
+  renderLibrary(req, res, false);
+});
+
 router.put('/beers/queue/:id', function(req, res) {
   // adjusting user's queue
   renderLibrary(req, res, true); // adjust so that we render a view for the currently selected category

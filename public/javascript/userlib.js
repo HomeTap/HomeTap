@@ -19,8 +19,13 @@ $(function() {
   });
 
   $('.queueButton').click(function() {
-    $.ajax('/user/beers/favorite/' + this.dataset.id, {
+    var self = this;
+
+    $.ajax('/user/beers/queue/' + this.dataset.id, {
       method: 'PUT'
+    }).done(function() {
+      if ($(self).text() === 'Add To Queue') $(self).text('Remove From Queue');
+      else if ($(self).text() === 'Remove From Queue') $(self).text('Add To Queue');
     });
   });
 });

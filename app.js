@@ -17,6 +17,8 @@ var app = express();
 var port = process.env.PORT || 3000;
 mongoose.connect(dbURI);
 
+// a comment for heroku 
+
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());

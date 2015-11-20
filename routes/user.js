@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var Schema = require('mongoose').Schema;
-var ObjectId = Schema.Types.ObjectId;
 
 var User = require('../models/user');
 var Category = require('../models/category');
@@ -45,8 +43,11 @@ router.get('/', function (req, res) {
 
 function renderLibrary(req, res, def) {
   User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
-    var favs  = result.favorites.map(function(favorite) {
+    var favs = result.favorites.map(function(favorite) {
       return favorite.toString();
+    });
+    var que = result.queue.map(function(q) {
+      return q.toString();
     });
     var categories = {};
 
@@ -62,6 +63,7 @@ function renderLibrary(req, res, def) {
       Beer.find({categoryId: category}).lean().exec(function(error, beers) {
         var newBeers = beers.map(function(beer) {
           beer.favorite = (favs.indexOf(beer._id.toString()) < 0 ? false : true);
+          beer.inQueue = (que.indexOf(beer._id.toString()) < 0 ? false : true);
           return beer;
         });
 
@@ -83,7 +85,7 @@ router.get('/beers/category/:id', function(req, res) {
 router.put('/beers/favorite/:id', function(req, res) {
   User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
     if (error) throw error;
-    var favs  = result.favorites.map(function(favorite) {
+    var favs = result.favorites.map(function(favorite) {
       return favorite.toString();
     });
     if (favs.indexOf(req.params.id) < 0 ? false : true) {
@@ -104,8 +106,26 @@ router.put('/beers/favorite/:id', function(req, res) {
 });
 
 router.put('/beers/queue/:id', function(req, res) {
-  // adjusting user's queue
-  renderLibrary(req, res, true); // adjust so that we render a view for the currently selected category
+  User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
+    if (error) throw error;
+    var que = result.queue.map(function(q) {
+      return q.toString();
+    });
+    if (que.indexOf(req.params.id) < 0 ? false : true) {
+      que.splice(que.indexOf(req.params.id), 1);
+      User.update({userIdString: req.user._id}, {$set: {queue: que}}, function(error) {
+        if (error) throw error;
+        res.end();
+      });
+    } else {
+      que.push(req.params.id);
+
+      User.update({userIdString: req.user._id}, {$set: {queue: que}}, function(error) {
+        if (error) throw error;
+        res.end();
+      });
+    }
+  });
 });
 
 module.exports = router;

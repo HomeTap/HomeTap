@@ -20,9 +20,9 @@ block content
         else
           button(class='favoriteButton', data-id='#{beer._id}', type='button') Favorite
         &nbsp;&nbsp;
-        //- if (beer.queue)
-        //-   button(class='queueButton', data-id='#{beer._id}' type='button') Remove From Queue
-        //- else
-        //-   button(class='queueButton', data-id='#{beer._id}' type='button') Add To Queue
+        if (beer.inQueue)
+          button(class='queueButton', data-id='#{beer._id}' type='button') Remove From Queue
+        else
+          button(class='queueButton', data-id='#{beer._id}' type='button') Add To Queue
 
   script(type='text/javascript', src='/javascript/userlib.js')

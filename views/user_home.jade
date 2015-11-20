@@ -20,7 +20,7 @@ block content
               p Current user: #{user.username}
 
   div.col-xs-18.col-md-12
-    table(class='table table-striped ')
+    table(class='table table-striped')
       thead
         tr 
           th
@@ -39,7 +39,7 @@ block content
         each beer in beerlist
           tr
             td #{beer.name} 
-            td: span(title=beer.description) #{beer.name}
+            td #{beer.description}
             td #{beer.category}
             td #{beer.stars}
             td: button(class='removeFromList', data-id='#{beer._id}', type='button') Remove

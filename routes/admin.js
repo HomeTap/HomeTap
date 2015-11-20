@@ -58,6 +58,10 @@ router.delete('/beers/:id', function(req, res) {
     });
 });
 
+router.get('/beers/category/:id', function(req, res) {
+  renderAdminLib(req, res, false);
+});
+
 router.get('/', function(req, res) {
   User.find({isAdmin: false}, function(err, users) {
     if(err) throw err;

@@ -105,6 +105,10 @@ router.put('/beers/favorite/:id', function(req, res) {
   });
 });
 
+router.get('/beers/favorite/:id', function(req, res) {
+  renderLibrary(req, res, false);
+});
+
 router.put('/beers/queue/:id', function(req, res) {
   User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
     if (error) throw error;

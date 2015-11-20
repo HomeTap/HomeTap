@@ -20,11 +20,15 @@ block content
     table(class='table table-striped col-md-6')
       thead
         tr: th User Orders
+        tr
+          th Username
+          th Beer
       tbody
         each user in userList
           tr 
             td #{user.screenName} 
                 td #{user.queue[0]}
                   td
-                    button(class='fulfillOrder', data-id= '#{user._id') Send Order
+                    button(class='fulfillOrder', data-id= '#{user._id}') Send Order
 
+  script(type='text/javascript', src='/javascript/adminHome.js')

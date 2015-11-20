@@ -4,6 +4,17 @@ block content
   header
     h1 Home Tap
 
+  div
+    .left
+    ul
+      li
+        script(type='text/javascript', src='/javascript/queuefav.js')
+        a(href='/user')  
+          button(onclick='Queue &rarr;') Queue
+      li
+        a(href='/user/beers/favorite/')    
+          button(onclick='Favorites &rarr;') Favorites
+
   .container
     nav
       ul
@@ -19,3 +30,4 @@ block content
     p Current user: #{user.username}
     a(href='/logout') Logout
     
+ 

@@ -44,6 +44,7 @@ router.post('/beers', function(req, res) {
     stars: req.body.stars,
     categoryIdString: req.body.categoryId.toString()
   });
+  newBeer.save(function(err) {
     if(err) console.log(err);
     renderAdminLib(req, res, false, req.body.categoryId);
   });

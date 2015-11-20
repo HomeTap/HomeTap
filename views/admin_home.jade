@@ -27,8 +27,8 @@ block content
         each user in userList
           tr 
             td #{user.screenName} 
-                td #{user.queue[0]}
-                  td
-                    button(class='fulfillOrder', data-id= '#{user._id}') Send Order
+            td #{user.queue[0]}
+            td
+              button(class='fulfillOrder', data-id= '#{user._id}') Send Order
 
   script(type='text/javascript', src='/javascript/adminHome.js')

@@ -7,7 +7,7 @@ $(function() {
       method: 'DELETE',
       url: '/admin/beers/' + this.dataset.id,
       success: function(){
-        element.parent().remove();
+        element.parent().parent().remove();
       }
     });
   });

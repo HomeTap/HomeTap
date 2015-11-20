@@ -71,7 +71,7 @@
     // Environments
     "browser"       : true,     // Web Browser (window, document, etc)
     "jasmine"       : false,    // Jasmine
-    "jquery"        : false,    // jQuery
+    "jquery"        : true,    // jQuery
     "mocha"         : true,     // Mocha
     "node"          : true,    // Node.js
     "nonstandard"   : true,    // Widely adopted globals (escape, unescape, etc)

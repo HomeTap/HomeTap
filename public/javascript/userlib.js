@@ -10,6 +10,14 @@ $(function() {
     });
   });
 
+  $('.favoriteList').click(function(){
+    var element = $(this);
+    $.ajax({
+      method: 'GET',
+      url: '/user/beers/favorite/' + this.dataset.id,
+    });
+  });
+
   $('.queueButton').click(function() {
     $.ajax('/user/beers/favorite/' + this.dataset.id, {
       method: 'PUT'

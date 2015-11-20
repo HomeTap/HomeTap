@@ -55,7 +55,8 @@ router.post('/beers', function(req, res) {
 router.delete('/beers/:id', function(req, res) {
     Beer.findByIdAndRemove(req.params.id, function(error) {
       if(error) throw error;
-      renderAdminLib(req, res, false);
+      // renderAdminLib(req, res, false);
+      res.redirect('/beers');
     });
 });
 
@@ -70,11 +71,18 @@ router.get('/', function(req, res) {
   });
 });
 
-router.post('/:id', function(req, res) {
-  User.find({_id: req.params.id}, function(err, order) {
-    if(err) throw err;
-    order.remove();
-    res.render('admin_home');
+router.put('/:id', function(req, res) {
+  User.find({isAdmin: false}, function(err, users) {
+      if(err) throw err;
+    User.find({_id: req.params.id}).lean().exec(function(err, order) {
+      if(err) throw err;
+      var que = order[0].queue.shift();
+      User.update({userIdString: req.user._id}, {$set: {queue: que}}, function(error) {
+        if (error) throw error;
+        console.log(que);
+        res.render('admin_home', {userList: users});
+      });
+    });
   });
 });
 

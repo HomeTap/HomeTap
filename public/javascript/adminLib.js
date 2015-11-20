@@ -1,10 +1,15 @@
 $(function() {
 
   $('.deleteButton').click(function(){
-    console.log('hit delete request');
+  
+    var element = $(this).parent();
+
     $.ajax({
       method: 'DELETE',
-      url: '/admin/beers/' + this.dataset.id
+      url: '/admin/beers/' + this.dataset.id,
+      success: function(){
+        element.remove();
+      }
     });
   });
 });

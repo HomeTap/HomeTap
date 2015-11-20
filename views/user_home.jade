@@ -2,25 +2,18 @@ extends layout
 
 block content
   header
+    img(src='/images/HomeTap.jpg')
     nav.navbar.navbar-default
       div.container
         div.navbar-header
-          h1 Home Tap
         div.navbar.navbar-collapse
           ul.nav.navbar-nav
             li.active
-              a(href='/user/beers') Browse Beer
+              a(href='/user') Home
             li
-              a(href='/logout') Logout
+              a(href='/user/beers') Browse Beer 
             li
-              p Current user: #{user.username}
-
-  div.col-xs-4.col-md-3
-    ul.list-group
-      li(class='list-group-item')
-        a(href='/user') Queue 
-      li.list-group-item
-        a(href='/user/beers/favorite/') Favorites    
+              a(href='/logout') Logout 
 
   div.col-xs-18.col-md-12
     table(class='table table-striped')

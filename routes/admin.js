@@ -56,7 +56,7 @@ router.delete('/beers/:id', function(req, res) {
     Beer.findByIdAndRemove(req.params.id, function(error) {
       if(error) throw error;
       // renderAdminLib(req, res, false);
-      res.redirect('/beers');
+      res.end()
     });
 });
 
@@ -65,23 +65,27 @@ router.get('/beers/category/:id', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-  User.find({isAdmin: false}, function(err, users) {
+  User.find({isAdmin: false}).lean().exec(function(err, users) {
+    var usersWithQueueItems = [];
+    users.forEach(function(user) {
+      if (user.queue.length > 0) usersWithQueueItems.push(user);
+    });
+
     if(err) throw err;
-    res.render('admin_home', {userList: users});
+    res.render('admin_home', {userList: usersWithQueueItems});
   });
 });
 
 router.put('/:id', function(req, res) {
-  User.find({isAdmin: false}, function(err, users) {
-      if(err) throw err;
-    User.find({_id: req.params.id}).lean().exec(function(err, order) {
-      if(err) throw err;
-      var que = order[0].queue.shift();
-      User.update({userIdString: req.user._id}, {$set: {queue: que}}, function(error) {
-        if (error) throw error;
-        console.log(que);
-        res.render('admin_home', {userList: users});
-      });
+  User.findOne({_id: req.params.id}).lean().exec(function(error, user) {
+    if(error) throw error;
+    var que = user.queue.map(function(q) {
+      return q.toString();
+    });
+    que.splice(0, 1);
+    User.update({_id: req.params.id}, {$set: {queue: que}}, function(error) {
+      if (error) throw error;
+      res.end();
     });
   });
 });

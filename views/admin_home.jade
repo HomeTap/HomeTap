@@ -1,18 +1,17 @@
 extends layout
 
 block content
+  header
+    img(src='/images/HomeTap.jpg')
   header.navbar.navbar-default
     div.container
       div.navbar-header
-        h1 Home Tap
       div.navbar.navbar-collapse
         ul.nav.navbar-nav
           li.active
             a(href='/') User Orders
           li 
             a(href='/admin/beers') Manage Beer Listings
-          li
-            a(href='/admin/settings') Settings
           li
             a(href='/logout') Logout
 
@@ -29,6 +28,6 @@ block content
             td #{user.screenName} 
                 td #{user.queue[0]}
                   td
-                    button(class='fulfillOrder', data-id= '#{user._id}') Send Order
+                    button(class='btn fulfillOrder', data-id= '#{user._id}') Send Order
 
   script(type='text/javascript', src='/javascript/adminHome.js')

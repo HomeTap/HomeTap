@@ -1,58 +1,20 @@
 extends layout
 
 block content
-  header
-<<<<<<< HEAD
-    h1 Home Tap
-
-  div.newbeer
-    p Add New Beer
-
-  div.form
-    form(method='POST', action='/admin/beers')
-      input(type='hidden', name='_method', value='add')
-
-      p Beer Name
-        input(type='text', name='name', placeholder='Beer Name')
-      p Category
-        select(name='categoryId', placeholder='Category')
-          option(value='', selected='selected')
-            each cat, index in cats
-              option(value='#{index}') #{cat}
-      p Description
-        input(type='text', name='description', placeholder='Descripton')
-      p Rating
-        input(type='number', name='stars', placeholder='Stars')
-      p Add Beer
-        input(type='submit', name='Add Beer')
-
-  div.categorylist
-    .left
-    ul
-      each category, index in categorylist
-        li 
-          a(href='/admin/beers/category/#{index}' class="list-group-item active") #{category}
-
-  div.beerlist
-    .right
-    - each beer in beerlist
-      p #{beer.name} 
-        button(class='deleteButton', data-id= '#{beer._id}') Delete
-=======
-    nav.navbar.navbar-default
-      div.container
-        div.navbar-header
-          h1 Home Tap
-        div.navbar.navbar-collapse
-          ul.nav.navbar-nav
-            li
-              a(href='/') User Orders
-            li.active
-              a(href='/admin/beers') Manage Beer Listings
-            li
-              a(href='/admin/settings') Settings
-            li
-              a(href='/logout') Logout
+  nav.navbar.navbar-default
+    div.container
+      div.navbar-header
+        h1 Home Tap
+      div.navbar.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='/') User Orders
+          li.active
+            a(href='/admin/beers') Manage Beer Listings
+          li
+            a(href='/admin/settings') Settings
+          li
+            a(href='/logout') Logout
 
   div.container
     div.col-xs-4.col-md-3
@@ -89,7 +51,6 @@ block content
           input(type='number', name='stars', placeholder='Stars')
           p Stars
           input(type='submit', name='Add Beer', text='Add Beer')
->>>>>>> f6ca2af6660065e809e9850803d4364d86af8bec
 
   script(type='text/javascript', src='/javascript/adminLib.js')
 

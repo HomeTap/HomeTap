@@ -14,8 +14,8 @@ p {
 
 /* updated styles */
 
-header {
-	background: #FEFFD9;
+nav, header {
+	background: #490102;
 	padding: 20px;
 }
 
@@ -56,6 +56,11 @@ button {
     border-radius: 4px;
     color: white;
     background: #888;
+}
+
+img{
+    width: 150px;
+    heigh: 100px;
 }
 
 input[type="text"] {

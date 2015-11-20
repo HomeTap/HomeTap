@@ -4,8 +4,9 @@ block content
   header
     h1 Home Tap
 
-  div.newbeer
-    p Add New Beer
+  div
+    a(href='/admin')
+      button(type='button') User Orders
 
   div.form
     form(method='POST', action='/admin/beers')

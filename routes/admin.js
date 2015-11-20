@@ -5,14 +5,14 @@ var Beer = require('../models/beer');
 var Category = require('../models/category');
 var User = require('../models/user');
 
-function renderAdminLib(req, res, def) {
+function renderAdminLib(req, res, def, catID) {
   User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
     var favs  = result.favorites;
     var categories = {};
 
     Category.find({}, function(error, results){
       var category = results[0]._id;
-      if (!def) category = req.params.id;
+      if (!def) category = req.params.id || catID;
 
       results.forEach(function(element) {
         categories[element._doc._id.toString()] = element._doc.category;
@@ -46,7 +46,7 @@ router.post('/beers', function(req, res) {
   });
   newBeer.save(function(err) {
     if(err) console.log(err);
-    renderAdminLib(req, res, false);
+    renderAdminLib(req, res, false, req.body.categoryId);
   });
 });
 
@@ -55,7 +55,7 @@ router.post('/beers', function(req, res) {
 router.delete('/beers/:id', function(req, res) {
     Beer.findByIdAndRemove(req.params.id, function(error) {
       if(error) throw error;
-      // renderAdminLib(req, res, false);
+      renderAdminLib(req, res, false);
     });
 });
 

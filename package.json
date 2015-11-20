@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "debug": "nodemon app.js",
+    "debug": "nodemon --exec './node_modules/.bin/nf start'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "devDependencies": {
     "chai": "^3.4.1",
     "chai-http": "^1.0.0",
+    "foreman": "^1.4.1",
     "gulp": "^3.9.0",
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^1.12.0",

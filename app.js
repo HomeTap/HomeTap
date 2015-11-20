@@ -81,5 +81,5 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(port, function() {
-  console.log('Listening on port 3000 ...');
+  console.log('Listening on port', port, '...what a great day!');
 });

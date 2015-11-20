@@ -17,10 +17,9 @@ block content
 
   div.container
     div.col-xs-4.col-md-3
-      ul
-        each category, index in categorylist
-          li 
-            a(href='/admin/beers/category/#{index}') #{category}
+     each category, index in categorylist
+        li 
+          a(href='/admin/beers/category/#{index}') #{category}
 
     div.col-xs-10.col-md-6
       table(class='table table-striped ')

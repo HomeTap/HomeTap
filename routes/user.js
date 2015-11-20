@@ -110,30 +110,6 @@ router.get('/favorites', function(req, res) {
   });
 });
 
-router.put('/favorites/:id', function(req, res) {
-    User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
-    if (error) throw error;
-    var favs = result.favorites.map(function(favorite) {
-      return favorite.toString();
-    });
-    if (favs.indexOf(req.params.id) < 0 ? false : true) {
-      favs.splice(favs.indexOf(req.params.id), 1);
-      User.update({userIdString: req.user._id}, {$set: {favorites: favs}}, function(error) {
-        if (error) throw error;
-        res.end();
-      });
-    } else {
-      favs.push(req.params.id);
-
-      User.update({userIdString: req.user._id}, {$set: {favorites: favs}}, function(error) {
-        if (error) throw error;
-        res.end();
-      });
-    }
-  });
-});
-
-
 router.get('/beers', function (req, res) {
   renderLibrary(req, res, true);
 });

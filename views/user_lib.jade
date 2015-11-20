@@ -13,6 +13,8 @@ block content
 
   div.beerlist
     .right
+    a(href='/user')
+      button(type='button') Back to Queue 
     each beer in beerlist
       p #{beer.name} 
         if (beer.favorite)

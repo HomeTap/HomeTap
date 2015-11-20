@@ -9,15 +9,13 @@ block content
       ul
         li 
           a(href='/user/beers') Browse New Beer
-        li Ready For Beer
     .queue
       each beer in user.queue
         div
           span(title=beer.description) #{beer.name} (Category: #{beer.category}) (Stars: #{beer.stars})
           &nbsp;&nbsp;
           a(href='/')
-            button(type='button') Remove
-          
+            button(type='button') Remove    
     p Current user: #{user.username}
     a(href='/logout') Logout
     

@@ -3,7 +3,6 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.Types.ObjectId;
 
 var userSchema = new Schema({
-  userId: ObjectId,
   screenName: String,
   isAdmin: Boolean,
   queue: [ObjectId],

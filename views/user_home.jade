@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  header
+    h1 Home Tap
+
+  div
+    .left
+    ul
+      li
+        a(href='/user')  
+          button(type='button') Queue
+      li
+        a(href='/user/beers/favorite/')   
+          button(type='button') Favorites
+
+  .container
+    nav
+      ul
+        li 
+          a(href='/user/beers') Browse New Beer
+    .queue
+      each beer in user.queue
+        div
+          span(title=beer.description) #{beer.name} (Category: #{beer.category}) (Stars: #{beer.stars})
+          &nbsp;&nbsp;
+          a(href='/')
+            button(type='button') Remove    
+    p Current user: #{user.username}
+    a(href='/logout') Logout
+    
+ 

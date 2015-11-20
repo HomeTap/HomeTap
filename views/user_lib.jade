@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  header
+    h1 Home Tap
+
+  div.categorylist
+    .left
+    ul
+      each category, index in categorylist
+        li
+          a(href='/user/beers/category/#{index}') #{category}
+
+  div.beerlist
+    .right
+    a(href='/user')
+      button(type='button') Back to Queue 
+    each beer in beerlist
+      p #{beer.name} 
+        if (beer.favorite)
+          button(class='favoriteButton', data-id='#{beer._id}', type='button') Un-Favorite
+        else
+          button(class='favoriteButton', data-id='#{beer._id}', type='button') Favorite
+        &nbsp;&nbsp;
+        if (beer.inQueue)
+          button(class='queueButton', data-id='#{beer._id}' type='button') Remove From Queue
+        else
+          button(class='queueButton', data-id='#{beer._id}' type='button') Add To Queue
+
+  script(type='text/javascript', src='/javascript/userlib.js')
+  a(href='/logout') Logout  

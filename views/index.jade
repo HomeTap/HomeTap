@@ -3,24 +3,9 @@ extends layout
 block content
   header
     h1 Home Tap
-  if (!user)
+
+  .container
     p
       a(href='/login') Login
     p
       a(href='/register') Register
-  else
-    nav
-      ul
-        li Browse New Beer
-        li Ready For Beer
-    .queue
-      each beer in user.queue
-        div
-          span(title=beer.description) #{beer.name} (Category: #{beer.category}) (Stars: #{beer.stars})
-          &nbsp;&nbsp;
-          a(href='/')
-            button(type='button') Remove
-          
-    p Current user: #{user.username}
-    a(href='/logout') Logout
-    

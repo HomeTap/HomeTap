@@ -1,21 +1,29 @@
 extends layout
 
 block content
-  header
-    h1 Home Tap
+  header.navbar.navbar-default
+    div.container
+      div.navbar-header
+        h1 Home Tap
+      div.navbar.navbar-collapse
+        ul.nav.navbar-nav
+          li.active
+            a(href='/') User Orders
+          li 
+            a(href='/admin/beers') Manage Beer Listings
+          li
+            a(href='/admin/settings') Settings
 
-  
-  div
-    .left
-      p User Queues
-      p Settings
-
-  div
-    .right
-      .button
-        a(href='/admin/beers')
-          button(type='button') Manage Beer Listings
-      div.form
+  div.container
+    table(class='table table-striped col-md-6')
+      thead
+        tr: th User Orders
+      tbody
         each user in userList
-          p #{user.screenName} #{user.queue[0]}
+          tr 
+            td #{user.screenName} 
+                td #{user.queue[0]}
+                  td
+                    button(class='fulfillOrder', data-id= '#{user._id}') Send Order
+
 

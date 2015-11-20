@@ -31,20 +31,17 @@ block content
               button() Favorites
         tr
           th Beer Name
-            th Description
-              th Category
-                th Stars
-                  th Remove
+          th Description
+          th Category
+          th Stars
+          th Remove
       tbody
         each beer in beerlist
           tr
             td #{beer.name} 
-              td: span(title=beer.description) #{beer.name}
-                td #{beer.category}
-                  td #{beer.stars}
-                    td: button(class='.removeQueueButton', data-id='#{beer._id}', type='button') Remove
-
-    
-
+            td: span(title=beer.description) #{beer.name}
+            td #{beer.category}
+            td #{beer.stars}
+            td: button(class='removeFromList', data-id='#{beer._id}', type='button') Remove
 
     script(type='text/javascript', src='/javascript/user_home.js')

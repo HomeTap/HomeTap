@@ -5,6 +5,39 @@ var User = require('../models/user');
 var Category = require('../models/category');
 var Beer = require('../models/beer');
 
+function renderLibrary(req, res, def) {
+  User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
+    var favs = result.favorites.map(function(favorite) {
+      return favorite.toString();
+    });
+    var que = result.queue.map(function(q) {
+      return q.toString();
+    });
+    var categories = {};
+
+    Category.find({}, function(error, results) {
+      var category = results[0]._id;
+      if (!def) category = req.params.id;
+
+      results.forEach(function(element) {
+        categories[element._doc._id.toString()] = element._doc.category;
+      });
+
+      if(error) throw error;
+      Beer.find({categoryId: category}).lean().exec(function(error, beers) {
+        var newBeers = beers.map(function(beer) {
+          beer.favorite = (favs.indexOf(beer._id.toString()) < 0 ? false : true);
+          beer.inQueue = (que.indexOf(beer._id.toString()) < 0 ? false : true);
+          return beer;
+        });
+
+        if(error) throw error;
+        res.render('user_lib', {categorylist: categories, beerlist: newBeers});
+      });
+    });
+  });
+}
+
 router.get('/', function (req, res) {
   var categories = {};
   User.findOne({ userIdString: req.user._id }, function(error, result) {
@@ -39,10 +72,6 @@ router.get('/', function (req, res) {
       });
     });
   });
-});
-
-router.put('/:id', function(req, res) {
-
 });
 
 router.get('/favorites', function(req, res) {
@@ -82,41 +111,28 @@ router.get('/favorites', function(req, res) {
 });
 
 router.put('/favorites/:id', function(req, res) {
-
-});
-
-function renderLibrary(req, res, def) {
-  User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
+    User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
+    if (error) throw error;
     var favs = result.favorites.map(function(favorite) {
       return favorite.toString();
     });
-    var que = result.queue.map(function(q) {
-      return q.toString();
-    });
-    var categories = {};
-
-    Category.find({}, function(error, results) {
-      var category = results[0]._id;
-      if (!def) category = req.params.id;
-
-      results.forEach(function(element) {
-        categories[element._doc._id.toString()] = element._doc.category;
+    if (favs.indexOf(req.params.id) < 0 ? false : true) {
+      favs.splice(favs.indexOf(req.params.id), 1);
+      User.update({userIdString: req.user._id}, {$set: {favorites: favs}}, function(error) {
+        if (error) throw error;
+        res.end();
       });
+    } else {
+      favs.push(req.params.id);
 
-      if(error) throw error;
-      Beer.find({categoryId: category}).lean().exec(function(error, beers) {
-        var newBeers = beers.map(function(beer) {
-          beer.favorite = (favs.indexOf(beer._id.toString()) < 0 ? false : true);
-          beer.inQueue = (que.indexOf(beer._id.toString()) < 0 ? false : true);
-          return beer;
-        });
-
-        if(error) throw error;
-        res.render('user_lib', {categorylist: categories, beerlist: newBeers});
+      User.update({userIdString: req.user._id}, {$set: {favorites: favs}}, function(error) {
+        if (error) throw error;
+        res.end();
       });
-    });
+    }
   });
-}
+});
+
 
 router.get('/beers', function (req, res) {
   renderLibrary(req, res, true);

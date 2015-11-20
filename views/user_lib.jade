@@ -8,9 +8,9 @@ block content
           h1 Home Tap
         div.navbar.navbar-collapse
           ul.nav.navbar-nav
-            li.active
-              a(href='/') Home
             li
+              a(href='/') Home
+            li.active
               a(href='/user/beers') Browse Beer
             li
               a(href='/user/settings') Settings
@@ -23,7 +23,7 @@ block content
       ul
         each category, index in categorylist
           li 
-            a(href='/admin/beers/category/#{index}') #{category}
+            a(href='/user/beers/category/#{index}') #{category}
 
     div.col-xs-12.col-md-7
       table(class='table table-striped ')

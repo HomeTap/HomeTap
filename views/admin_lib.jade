@@ -1,18 +1,19 @@
 extends layout
 
 block content
-  header.navbar.navbar-default
-    div.container
-      div.navbar-header
-        h1 Home Tap
-      div.navbar.navbar-collapse
-        ul.nav.navbar-nav
-          li.active 
-            a(href='/') User Orders
-          li 
-            a(href='/admin/beers') Manage Beer Listings
-          li
-            a(href='/admin/settings') Settings
+  header
+    nav.navbar.navbar-default
+      div.container
+        div.navbar-header
+          h1 Home Tap
+        div.navbar.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a(href='/') User Orders
+            li.active
+              a(href='/admin/beers') Manage Beer Listings
+            li
+              a(href='/admin/settings') Settings
 
   div.container
     div.col-xs-6.col-md-4
@@ -21,30 +22,24 @@ block content
           li 
             a(href='/admin/beers/category/#{index}') #{category}
 
-    div
-      form(method='POST', action='/admin/beers')
-        table.table
-          thead 
-          tr: th Add New Beer
-          tr: input(type='hidden', name='_method', value='add')
-        tbody
-          tr
-            td Beer Name
-            td: input(type='text', name='name', placeholder='Beer Name')
-          tr
-            td Category
-            td: select(name='categoryId', placeholder='Category')
-                  option(value='', selected='selected')
-                    each cat, index in cats
-                      option(value='#{index}') #{cat}
-          tr
-            td Description
-            td: input(type='text', name='description', placeholder='Descripton')
-          tr
-            td Stars
-            td: input(type='number', name='stars', placeholder='Stars')
-        p Add Beer
+    div.container
+      div.col-md-4
+        form(method='POST', action='/admin/beers')
+          h4 Add New Beer &nbsp;&nbsp;
+            input(type='hidden', name='_method', value='add') 
+          input(type='text', name='name', placeholder='Beer Name')
+          p Beer Name
+          select(name='categoryId', placeholder='Category')
+            option(value='', selected='selected')
+              each cat, index in cats
+                option(value='#{index}') #{cat}
+          p Category
+          input(type='text', name='description', placeholder='Descripton')
+          p Description
+          input(type='number', name='stars', placeholder='Stars')
+          p Stars
           input(type='submit', name='Add Beer', text='Add Beer')
+          p Add Beer
 
     div.col-xs-12.col-md-8
       table(class='table table-striped ')

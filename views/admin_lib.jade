@@ -30,7 +30,7 @@ block content
     ul
       each category, index in categorylist
         li 
-          a(href='/admin/beers/category/#{index}') #{category}
+          a(href='/admin/beers/category/#{index}' class="list-group-item active") #{category}
 
   div.beerlist
     .right

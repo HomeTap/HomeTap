@@ -55,7 +55,8 @@ router.post('/beers', function(req, res) {
 router.delete('/beers/:id', function(req, res) {
     Beer.findByIdAndRemove(req.params.id, function(error) {
       if(error) throw error;
-      renderAdminLib(req, res, false);
+      // renderAdminLib(req, res, false);
+      res.redirect('/beers');
     });
 });
 

@@ -41,10 +41,11 @@ router.post('/beers', function(req, res) {
     name: req.body.name,
     categoryId: req.body.categoryId,
     description: req.body.description,
-    stars: req.body.stars
+    stars: req.body.stars,
+    categoryIdString: req.body.categoryId.toString()
   });
   newBeer.save(function(err) {
-    if(err) throw err;
+    if(err) console.log(err);
     renderAdminLib(req, res, false);
   });
 });
@@ -54,7 +55,7 @@ router.post('/beers', function(req, res) {
 router.delete('/beers/:id', function(req, res) {
     Beer.findByIdAndRemove(req.params.id, function(error) {
       if(error) throw error;
-      renderAdminLib(req, res, false);
+      // renderAdminLib(req, res, false);
     });
 });
 

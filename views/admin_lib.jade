@@ -16,8 +16,8 @@ block content
       p Category
         select(name='categoryId', placeholder='Category')
           option(value='', selected='selected')
-            each cat, i in cats
-              option(value=cat._id) #{cat}
+            each cat, index in cats
+              option(value='#{index}') #{cat}
       p Description
         input(type='text', name='description', placeholder='Descripton')
       p Rating

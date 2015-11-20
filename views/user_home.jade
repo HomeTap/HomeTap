@@ -9,15 +9,18 @@ block content
         div.navbar.navbar-collapse
           ul.nav.navbar-nav
             li.active
-              a(href='/') Home
-            li
               a(href='/user/beers') Browse Beer
-            li
-              a(href='/user/settings') Settings
             li
               a(href='/logout') Logout
             li
               p Current user: #{user.username}
+
+  div.col-xs-4.col-md-3
+    ul.list-group
+      li(class='list-group-item')
+        a(href='/user') Queue 
+      li.list-group-item
+        a(href='/user/beers/favorite/') Favorites    
 
   div.col-xs-18.col-md-12
     table(class='table table-striped')
@@ -45,3 +48,4 @@ block content
             td: button(class='removeFromList', data-id='#{beer._id}', type='button') Remove
 
     script(type='text/javascript', src='/javascript/user_home.js')
+

@@ -1,27 +1,26 @@
 extends layout
 
 block content
-  header
-    nav.navbar.navbar-default
-      div.container
-        div.navbar-header
-          h1 Home Tap
-        div.navbar.navbar-collapse
-          ul.nav.navbar-nav
-            li
-              a(href='/') User Orders
-            li.active
-              a(href='/admin/beers') Manage Beer Listings
-            li
-              a(href='/admin/settings') Settings
-            li
-              a(href='/logout') Logout
+  nav.navbar.navbar-default
+    div.container
+      div.navbar-header
+        h1 Home Tap
+      div.navbar.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='/') User Orders
+          li.active
+            a(href='/admin/beers') Manage Beer Listings
+          li
+            a(href='/admin/settings') Settings
+          li
+            a(href='/logout') Logout
 
   div.container
     div.col-xs-4.col-md-3
-      ul
+      ul.list-group
         each category, index in categorylist
-          li 
+          li.list-group-item
             a(href='/admin/beers/category/#{index}') #{category}
 
     div.col-xs-10.col-md-6

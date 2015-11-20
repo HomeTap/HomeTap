@@ -14,7 +14,7 @@ var routes = require('./routes/index');
 var user = require('./routes/user');
 var admin = require('./routes/admin');
 var app = express();
-
+var port = process.env.PORT || 3000;
 mongoose.connect(dbURI);
 
 passport.use(new LocalStrategy(Account.authenticate()));
@@ -23,6 +23,7 @@ passport.deserializeUser(Account.deserializeUser());
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
+app.set('port', port);
 
 app.use(express.static(__dirname + '/public'));
 app.use(logger('dev'));
@@ -79,6 +80,6 @@ app.use(function(err, req, res, next) {
   console.log(next);
 });
 
-app.listen(3000, function() {
-  console.log('Listening on port 3000 ...');
+app.listen(port, function() {
+  console.log('Listening on port', port, '...what a great day!');
 });

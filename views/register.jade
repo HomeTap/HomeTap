@@ -4,24 +4,25 @@ block content
   header
     h1 Home Tap
   h2 Registration Page
-  div.login  
+  div 
     form(action='/register' method='POST')
       label(for='screenName') Enter Screen Name
       &nbsp;&nbsp;
-      input(type='text' name='screenName' placeholder='Screen Name')
+      input(class="form-control" type='text' name='screenName' placeholder='Screen Name')
       br
       label(for='username') Enter E-mail
       &nbsp;&nbsp;
-      input(type='email' name='username' placeholder='E-mail')
+      input(class="form-control" type='email' name='username' placeholder='E-mail')
       br
       label(for='password') Enter Password
       &nbsp;&nbsp;
-      input(type='text' name='password' placeholder='Password')
-      
-      select(name='subscription')
-        option(value='' selected='selected')
-        option(value='64 Oz. Per Week') 64 Oz. Per Week
-        option(value='128 Oz. Per Week') 128 Oz. Per Week
+      input(class="form-control" type='password' name='password' placeholder='Password')
+      br
+      p Choose Your Subscription
+        select(name='subscription')
+          option(value='' selected='selected')
+          option(value='64 Oz. Per Week') 64 Oz. Per Week
+          option(value='128 Oz. Per Week') 128 Oz. Per Week
       
       br
       button(type='submit') Sign Up

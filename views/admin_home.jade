@@ -12,8 +12,6 @@ block content
           li 
             a(href='/admin/beers') Manage Beer Listings
           li
-            a(href='/admin/settings') Settings
-          li
             a(href='/logout') Logout
 
   div.container
@@ -29,6 +27,6 @@ block content
             td #{user.screenName} 
                 td #{user.queue[0]}
                   td
-                    button(class='fulfillOrder', data-id= '#{user._id}') Send Order
+                    button(class='btn fulfillOrder', data-id= '#{user._id}') Send Order
 
   script(type='text/javascript', src='/javascript/adminHome.js')

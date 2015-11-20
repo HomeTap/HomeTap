@@ -4,21 +4,18 @@ block content
   header
     h1 Home Tap
 
-  div
-    .left
-    ul
-      li
-        a(href='/user')  
-          button(type='button') Queue
-      li
-        a(href='/user/beers/favorite/')   
-          button(type='button') Favorites
+  div.col-xs-4.col-md-3
+    ul.list-group
+      li.list-group-item
+        a(href='/user') Queue 
+      li.list-group-item
+        a(href='/user/beers/favorite/') Favorites 
+         
 
   .container
     nav
-      ul
-        li 
-          a(href='/user/beers') Browse New Beer
+      a(href='/user/beers') 
+        button(type='button') Browse New Beer           
     .queue
       each beer in user.queue
         div

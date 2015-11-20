@@ -10,14 +10,22 @@ block content
         li 
           a(href='/user/beers') Browse New Beer
         li Ready For Beer
-    .queue
-      each beer in user.queue
+
+    .categorylist.left
+      ul
+        li
+          a(href='/user') Queue
+        li
+          a(href='/user/favorites') Favorites
+
+    .beerlist.right
+      each beer in beerlist
         div
           span(title=beer.description) #{beer.name} (Category: #{beer.category}) (Stars: #{beer.stars})
           &nbsp;&nbsp;
-          a(href='/')
-            button(type='button') Remove
-          
+          button(class='.removeQueueButton', data-id='#{beer._id}', type='button') Remove
+
     p Current user: #{user.username}
     a(href='/logout') Logout
-    
+
+    script(type='text/javascript', src='/javascript/user_home.js')

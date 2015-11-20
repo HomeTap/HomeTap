@@ -9,9 +9,11 @@ block content
         div.navbar.navbar-collapse
           ul.nav.navbar-nav
             li.active
-              a(href='/user/beers') Browse Beers
+              a(href='/user/beers') Browse Beer
             li
               a(href='/logout') Logout
+            li
+              p Current user: #{user.username}
 
   div.col-xs-4.col-md-3
     ul.list-group
@@ -20,15 +22,30 @@ block content
       li.list-group-item
         a(href='/user/beers/favorite/') Favorites    
 
-  .container           
-    .queue
-      each beer in user.queue
-        div
-          span(title=beer.description) #{beer.name} (Category: #{beer.category}) (Stars: #{beer.stars})
-          &nbsp;&nbsp;
-          a(href='/')
-            button(type='button') Remove    
-    p Current user: #{user.username}
+  div.col-xs-18.col-md-12
+    table(class='table table-striped ')
+      thead
+        tr 
+          th
+            a(href='/')
+              button() Queue
+          th 
+            a(href='/user/favorites') 
+              button() Favorites
+        tr
+          th Beer Name
+          th Description
+          th Category
+          th Stars
+          th Remove
+      tbody
+        each beer in beerlist
+          tr
+            td #{beer.name} 
+            td: span(title=beer.description) #{beer.name}
+            td #{beer.category}
+            td #{beer.stars}
+            td: button(class='removeFromList', data-id='#{beer._id}', type='button') Remove
 
-    
- 
+    script(type='text/javascript', src='/javascript/user_home.js')
+

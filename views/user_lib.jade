@@ -12,6 +12,8 @@ block content
               a(href='/user') Back to Queue
             li
               a(href='/logout') Logout
+            li
+              p Current user: #{user.username}  
 
   div.categorylist
     ul.list-group.col-xs-4.col-md-6
@@ -19,19 +21,24 @@ block content
         li.list-group-item
           a(href='/user/beers/category/#{index}') #{category}
 
-  div.col-xs-10.col-md-6
-    div.beerlist 
-      each beer in beerlist
-        p #{beer.name} 
-          if (beer.favorite)
-            button(class='favoriteButton', data-id='#{beer._id}', type='button') Un-Favorite
-          else
-            button(class='favoriteButton', data-id='#{beer._id}', type='button') Favorite
-          &nbsp;&nbsp;
-          if (beer.inQueue)
-            button(class='queueButton', data-id='#{beer._id}' type='button') Remove From Queue
-          else
-            button(class='queueButton', data-id='#{beer._id}' type='button') Add To Queue
-  
+  div.col-xs-12.col-md-7
+    table(class='table table-striped ')
+      thead
+        tr: th Beers
+      tbody
+        each beer in beerlist
+          tr
+            td #{beer.name} 
+            td
+              if (beer.favorite)
+                 button(class='favoriteButton', data-id='#{beer._id}', type='button') Un-Favorite
+              else
+                button(class='favoriteButton', data-id='#{beer._id}', type='button') Favorite
+             td
+              if (beer.inQueue)
+                button(class='queueButton', data-id='#{beer._id}' type='button') Remove From Queue
+              else
+                button(class='queueButton', data-id='#{beer._id}' type='button') Add To Queue
+
   script(type='text/javascript', src='/javascript/userlib.js')
-  
+

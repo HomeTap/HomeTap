@@ -34,6 +34,8 @@ h2 {
     color: #444;
 }
 
+
+
 button {
 	display: inline-block;
     padding: 6px 12px;
@@ -55,7 +57,7 @@ button {
     border: 1px solid transparent;
     border-radius: 4px;
     color: white;
-    background: #888;
+    background: #a7873c;
 }
 
 img{

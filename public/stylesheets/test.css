@@ -12,6 +12,9 @@ p {
   margin-top:  10px;
 }
 
+form {
+  margin-left: 40px; 
+}
 /* updated styles */
 
 nav, header {
@@ -27,7 +30,7 @@ h1 {
 
 h2 {
     max-width: 1140px;
-    margin: 0 auto;
+    margin-left: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: 24px;
@@ -60,6 +63,10 @@ button {
     background: #a7873c;
 }
 
+.buttonbottom {
+    margin-left: 40px;
+}
+
 img{
     width: 150px;
     heigh: 100px;
@@ -83,3 +90,4 @@ input[type="text"] {
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+

@@ -3,8 +3,6 @@ var passport = require('passport');
 
 var Account = require('../models/account');
 var User = require('../models/user');
-var Category = require('../models/category');
-var Beer = require('../models/beer');
 var router = express.Router();
 
 router.get('/', function (req, res) {
@@ -24,17 +22,15 @@ router.get('/login', function (req, res) {
       if (result.isAdmin) return res.redirect('/admin');
       else return res.redirect('/user');
     });
-  }
-  else res.render('login');
+  } else res.render('login');
 });
 
 router.post('/login', function (req, res, next) {
-  passport.authenticate('local', function (err, user, info) {
-    if (err) return next(err);
-    if (!user) return res.
-      render('login', { message: info.message });
-    req.login(user, function (err) {
-      if (err) return next(err);
+  passport.authenticate('local', function (error, user, info) {
+    if (error) return next(error);
+    if (!user) return res.render('login', { message: info.message });
+    req.login(user, function (error) {
+      if (error) return next(error);
       User.findOne({ userIdString: req.user._id }, function(error, result) {
         if (error) throw error;
         if (result.isAdmin) return res.redirect('/admin');
@@ -51,8 +47,7 @@ router.get('/register', function (req, res) {
       if (result.isAdmin) return res.redirect('/admin');
       else return res.redirect('/user');
     });
-  }
-  else res.render('register');
+  } else res.render('register');
 });
 
 router.post('/register', function (req, res) {
@@ -67,8 +62,8 @@ router.post('/register', function (req, res) {
         subscription: req.body.subscription,
         userIdString: req.user._id.toString()
       });
-      newUser.save(function(err){
-        if (err) throw err;
+      newUser.save(function(error) {
+        if (error) throw error;
         res.redirect('/user');
       });
     });

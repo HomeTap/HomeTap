@@ -1,18 +1,23 @@
 extends layout
 
 block content
-  header
-    img(src='/images/HomeTap.jpg')
-    nav.navbar.navbar-default
-      div.container
-        div.navbar.navbar-collapse
-          ul.nav.navbar-nav
-            li.active
-              a(href='/user') Home
-            li
-              a(href='/user/beers') Browse Beer 
-            li
-              a(href='/logout') Logout     
+  nav.navbar.navbar-default
+    div.container-fluid
+      div.navbar-header
+        button(type="btn" class="navbar-toggle" data-toggle="collapse")
+        a(href='/user')
+          img.nav(src='/images/HomeTap.jpg')
+      div.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='/user') 
+              button.nav(class='btn navbar-btn' type='button') Home
+          li
+            a(href='/user/beers')
+              button.nav(class='btn navbar-btn' type='button') Browse Beer 
+          li
+            a(href='/logout')
+              button.nav(class='btn navbar-btn' type='button') Logout      
 
   div.categorylist
     ul.list-group.col-xs-4.col-md-6

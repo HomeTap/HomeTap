@@ -5,7 +5,7 @@ block content
     img(src='/images/HomeTap.jpg')
   h2 Registration Page
   div.row
-    div.col-xs-10.col-med-5 
+    div.col-xs-8
       form(action='/register' method='POST')
         label(for='screenName') Enter Screen Name
         &nbsp;&nbsp;
@@ -27,9 +27,9 @@ block content
           option(value='128 Oz. Per Week') 128 Oz. Per Week
       br    
       div.buttonbottom   
-        button(type='submit') Sign Up
+        button(class = 'btn' type='submit') Sign Up
         &nbsp;&nbsp;
         a(href='/')
-          button(type='button') Cancel
+          button(class='btn' type='button') Cancel
 
   p #{message}

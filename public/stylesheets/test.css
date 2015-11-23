@@ -1,3 +1,7 @@
+body {
+  background-color: #FFDEBA;
+}
+
 input, li {
   margin: 4 10px;
   border-radius: 10;
@@ -17,10 +21,17 @@ form {
 }
 /* updated styles */
 
-nav, header {
+header {
 	background: #490102;
 	padding: 20px;
 }
+
+nav.navbar.navbar-default {
+    background: #490102;
+    border: none;
+    padding: 10px;
+}
+
 
 h1 {
 	font-size: 31px;
@@ -37,7 +48,11 @@ h2 {
     color: #444;
 }
 
-
+button.nav{
+    padding: 5px;
+    text-align: center;
+    margin-top: 15px;
+}
 
 button {
 	display: inline-block;
@@ -69,7 +84,14 @@ button {
 
 img{
     width: 150px;
-    heigh: 100px;
+    height: 100px;
+}
+
+img.nav{
+    width: 150px;
+    height: 100px;
+    padding: 0 5px 0 0;
+    margin-left: 0;
 }
 
 input[type="text"] {

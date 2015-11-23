@@ -1,19 +1,23 @@
 extends layout
 
 block content
-  header
-    img(src='/images/HomeTap.jpg')
-    nav.navbar.navbar-default
-      div.container
-        div.navbar-header
-        div.navbar.navbar-collapse
-          ul.nav.navbar-nav
-            li.active
-              a(href='/user') Home
-            li
-              a(href='/user/beers') Browse Beer 
-            li
-              a(href='/logout') Logout 
+  nav.navbar.navbar-default
+    div.container-fluid
+      div.navbar-header
+        button(type="btn" class="navbar-toggle" data-toggle="collapse")
+        a(href='/user')
+          img.nav(src='/images/HomeTap.jpg')
+      div.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='/user') 
+              button.nav(class='btn navbar-btn' type='button') Home
+          li
+            a(href='/user/beers')
+              button.nav(class='btn navbar-btn' type='button') Browse Beer 
+          li
+            a(href='/logout')
+              button.nav(class='btn navbar-btn' type='button') Logout 
 
   div.col-xs-18.col-md-12
     table(class='table table-striped')
@@ -21,10 +25,10 @@ block content
         tr 
           th
             a(href='/')
-              button() Queue
+              button(class='btn' type='button') Queue
           th 
             a(href='/user/favorites') 
-              button() Favorites
+              button(class='btn' type='button') Favorites
         tr
           th Beer Name
           th Description
@@ -38,7 +42,7 @@ block content
             td #{beer.description}
             td #{beer.category}
             td #{beer.stars}
-            td: button(class='removeFromList', data-id='#{beer._id}', type='button') Remove
+            td: button(class='removeFromList', class='btn' data-id='#{beer._id}', type='button') Remove
 
     script(type='text/javascript', src='/javascript/user_home.js')
 

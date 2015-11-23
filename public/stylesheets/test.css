@@ -32,7 +32,6 @@ nav.navbar.navbar-default {
     padding: 10px;
 }
 
-
 h1 {
 	font-size: 31px;
 	max-width: 1140px;
@@ -81,6 +80,18 @@ button {
 .buttonbottom {
     margin-left: 40px;
 }
+
+table {
+    border-color: #402A19;
+}
+
+table.table.table-striped {
+    border-bottom: #402A19;
+}
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #FFCD9C;
+ }
 
 img{
     width: 150px;

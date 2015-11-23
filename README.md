@@ -2,16 +2,16 @@
 ##About HomeTap
 ###Overview
 This is an application designed for use by a brewing company to manage deliveries of beers to 
-customers. The app has two different views 1) an administrator portion and 2) a user view. Each view has two corresponding features a home page and access portal to a library of beers.
+customers. The app has two different views 1) an administrator portion and 2) a user view. Each view has features: a home page and an access portal to a library of beers.
 
-There is no special login for administrators, the system will automatically redirect you to the appropriate view depending on your login credentials. For details on what actions are available in each view please read the following sections for more details. 
+There is no special login for administrators. The system will automatically redirect you to the appropriate view depending on your login credentials. For details on what actions are available in each view please read the following sections for more details. 
 
 To view a working version of this app please go to: https://hometap.herokuapp.com/
 
 ####The Administrator view
 On the administrators home page is a list of all the users who are expecting orders. Once the order is prepared, the admin may push the send button to update the user's queue, and remove the order from the current list.
 
-In the administrator's library page there options for several different given to the administrator. As with the user view, all of the beers currently in the database are available in their current categories. Additionally, the admin has the ability to delete individual beers from the library, and at the bottom of the page there is a widget to add beer to the library. 
+As with the user view, all of the beers currently in the database are available in their current categories. Additionally, the admin has the ability to delete individual beers from the library, and at the bottom of the page there is a widget to add beer to the library. 
 
 ######Future Features:
 - Add new categories of beer as needed

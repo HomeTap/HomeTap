@@ -4,10 +4,13 @@ block content
   nav.navbar.navbar-default
     div.container-fluid
       div.navbar-header
-        button(type="btn" class="navbar-toggle" data-toggle="collapse")
+        button(type='btn' class='navbar-toggle' data-toggle='collapse' data-target='#myNavbar')
+          span(class='icon-bar')
+          span(class='icon-bar')
+          span(class='icon-bar') 
         a(href='/user')
           img.nav(src='/images/hometap.jpg')
-      div(class='collapse navbar-collapse' id='spy-scroll-id')
+      div(class='collapse navbar-collapse' id='myNavbar')
         ul.nav.navbar-nav
           li
             a(href='/user') 

@@ -33,12 +33,7 @@ function renderUserLibrary(req, res, def) {
           return element;
         });
 
-<<<<<<< HEAD
         res.render('user_lib', {categories: categories, beers: beers});
-=======
-        if(error) throw error;
-        res.render('user_lib', {categories: categories, beers: newBeers});
->>>>>>> NewStyle
       });
     });
   });

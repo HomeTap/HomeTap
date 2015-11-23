@@ -1,10 +1,10 @@
+body {
+  background-color: #FFDEBA;
+}
+
 input, li {
   margin: 4 10px;
   border-radius: 10;
-}
-
-h1 {
-  margin: 10px;
 }
 
 p {
@@ -12,11 +12,24 @@ p {
   margin-top:  10px;
 }
 
+form {
+  margin-left: 40px; 
+}
 /* updated styles */
 
-nav, header {
+header {
 	background: #490102;
 	padding: 20px;
+}
+
+nav.navbar.navbar-default {
+    background: #490102;
+    border: none;
+    padding: 10px;
+}
+
+.active {
+    color: #402A19;
 }
 
 h1 {
@@ -27,11 +40,17 @@ h1 {
 
 h2 {
     max-width: 1140px;
-    margin: 0 auto;
+    margin-left: 40px;
     padding-top: 20px;
     padding-bottom: 20px;
     font-size: 24px;
     color: #444;
+}
+
+button.nav {
+    padding: 5px;
+    text-align: center;
+    margin-top: 15px;
 }
 
 button {
@@ -55,13 +74,51 @@ button {
     border: 1px solid transparent;
     border-radius: 4px;
     color: white;
-    background: #888;
+    background: #a7873c;
 }
 
-img{
-    width: 150px;
-    heigh: 100px;
+.submit {
+    margin-bottom: 20px;
 }
+
+.buttonbottom {
+    margin-left: 40px;
+}
+
+.categories {
+    background: #FFCD9C;
+    color: #402A19;
+}
+
+a:hover {
+    color: white;
+}
+
+table.table.table-striped {
+    border-bottom: #402A19;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #FFCD9C;
+ }
+
+img {
+    width: 150px;
+    height: 100px;
+}
+
+img.nav {
+    width: 150px;
+    height: 100px;
+    padding: 0 5px 0 0;
+    margin-left: 0;
+}
+
+.index {
+    margin-left: 80px;
+}
+
 
 input[type="text"] {
     display: block;
@@ -81,3 +138,4 @@ input[type="text"] {
     -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }
+

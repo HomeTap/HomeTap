@@ -1,30 +1,34 @@
 extends layout
 
 block content
-  header
-    img(src='/images/HomeTap.jpg')
-    nav.navbar.navbar-default
-      div.container
-        div.navbar-header
-        div.navbar.navbar-collapse
-          ul.nav.navbar-nav
-            li.active
-              a(href='/user') Home
-            li
-              a(href='/user/beers') Browse Beer 
-            li
-              a(href='/logout') Logout 
+  nav.navbar.navbar-default
+    div.container-fluid
+      div.navbar-header
+        button(type="btn" class="navbar-toggle" data-toggle="collapse")
+        a(href='/user')
+          img.nav(src='/images/HomeTap.jpg')
+      div(class='collapse navbar-collapse' id='spy-scroll-id')
+        ul.nav.navbar-nav
+          li
+            a(href='/user') 
+              button.nav.active(class='btn navbar-btn' type='button') Home
+          li
+            a(href='/user/beers')
+              button.nav(class='btn navbar-btn' type='button') Browse Beer 
+          li
+            a(href='/logout')
+              button.nav(class='btn navbar-btn' type='button') Logout 
 
-  div.col-xs-18.col-md-12
-    table(class='table table-striped')
+  div.container
+    table(class='table table-striped col-md-6')
       thead
         tr 
           th
-            a(href='/')
-              button() Queue
+            a(href='/user')
+              button(class='btn' type='button') Queue
           th 
             a(href='/user/favorites') 
-              button() Favorites
+              button(class='btn' type='button') Favorites
         tr
           th Beer Name
           th Description
@@ -32,13 +36,13 @@ block content
           th Stars
           th Remove
       tbody
-        each beer in beerlist
+        each beer in beers
           tr
             td #{beer.name} 
             td #{beer.description}
             td #{beer.category}
             td #{beer.stars}
-            td: button(class='removeFromList', data-id='#{beer._id}', type='button') Remove
+            td: button(class='removeFromList', class='btn' data-id='#{beer._id}', type='button') Remove
 
     script(type='text/javascript', src='/javascript/user_home.js')
 

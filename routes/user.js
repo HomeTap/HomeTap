@@ -32,7 +32,7 @@ function renderLibrary(req, res, def) {
         });
 
         if(error) throw error;
-        res.render('user_lib', {categorylist: categories, beerlist: newBeers});
+        res.render('user_lib', {categories: categories, beers: newBeers});
       });
     });
   });
@@ -67,7 +67,7 @@ router.get('/', function (req, res) {
           });
           result.favorites = results;
 
-          res.render('user_home', { title: 'HomeTap', user: result, beerlist: result.queue });
+          res.render('user_home', { title: 'HomeTap', user: result, beers: result.queue });
         });
       });
     });
@@ -103,7 +103,7 @@ router.get('/favorites', function(req, res) {
           });
           result.favorites = results;
 
-          res.render('user_home', { title: 'HomeTap', user: result, beerlist: result.favorites });
+          res.render('user_home', { title: 'HomeTap', user: result, beers: result.favorites });
         });
       });
     });

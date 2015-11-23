@@ -46,10 +46,12 @@ block content
           input(type='text' name='name' placeholder='Beer Name')
           br
           label(for='categoryId') Category
+          br
           select(name='categoryId')
             option(value='' selected='selected')
             each category, index in categories
               option(value='#{index}') #{category}
+          br
           label(for='description') Description
           input(type='text' name='description' placeholder='Descripton')
           br

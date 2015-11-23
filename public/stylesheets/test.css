@@ -28,7 +28,7 @@ nav.navbar.navbar-default {
     padding: 10px;
 }
 
-.active, {
+.active {
     color: #402A19;
 }
 
@@ -47,7 +47,7 @@ h2 {
     color: #444;
 }
 
-button.nav{
+button.nav {
     padding: 5px;
     text-align: center;
     margin-top: 15px;
@@ -90,29 +90,35 @@ button {
     color: #402A19;
 }
 
-a:hover, a:active {
+a:hover {
     color: white;
 }
 
 table.table.table-striped {
     border-bottom: #402A19;
 }
+
 .table-striped>tbody>tr:nth-child(odd)>td, 
 .table-striped>tbody>tr:nth-child(odd)>th {
    background-color: #FFCD9C;
  }
 
-img{
+img {
     width: 150px;
     height: 100px;
 }
 
-img.nav{
+img.nav {
     width: 150px;
     height: 100px;
     padding: 0 5px 0 0;
     margin-left: 0;
 }
+
+.index {
+    margin-left: 80px;
+}
+
 
 input[type="text"] {
     display: block;

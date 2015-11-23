@@ -23,7 +23,7 @@ block content
     div.col-xs-4.col-md-3
       ul.list-group
         each category, index in categories
-          li.list-group-item
+          li.categories.list-group-item
             a.categories(href='/admin/beers/category/#{index}') #{category}
 
     div.col-xs-10.col-md-6
@@ -51,6 +51,7 @@ block content
             option(value='' selected='selected')
             each category, index in categories
               option(value='#{index}') #{category}
+          br
           br
           label(for='description') Description
           input(type='text' name='description' placeholder='Descripton')

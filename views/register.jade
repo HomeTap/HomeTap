@@ -3,9 +3,9 @@ extends layout
 block content
   header
     img(src='/images/hometap.jpg')
-    h2 Registration Page
 
   .container
+    h2 Registration Page
     form(action='/register' method='POST')
       label(for='screenName') Enter Screen Name
       &nbsp;&nbsp;
@@ -25,9 +25,9 @@ block content
           option(value='64 Oz. Per Week') 64 Oz. Per Week
           option(value='128 Oz. Per Week') 128 Oz. Per Week
       br
-      button(type='submit') Sign Up
+      button(class='btn btn-primary' type='submit') Sign Up
       &nbsp;&nbsp;
       a(href='/')
-        button(type='button') Cancel
+        button(class='btn' type='button') Cancel
 
       p #{message}

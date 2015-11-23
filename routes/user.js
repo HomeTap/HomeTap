@@ -32,8 +32,8 @@ function renderUserLibrary(req, res, def) {
           element.inQueue = (que.indexOf(element._id.toString()) < 0 ? false : true);
           return element;
         });
-
-        res.render('user_lib', {categories: categories, beers: beers});
+        console.log('category', category);
+        res.render('user_lib', {categories: categories, selected: category, beers: beers});
       });
     });
   });
@@ -68,7 +68,7 @@ router.get('/', function (req, res) {
           });
           result.favorites = results;
 
-          res.render('user_home', { title: 'HomeTap', user: result, beers: result.queue });
+          res.render('user_home', { title: 'HomeTap', user: result, select: result, beers: result.queue });
         });
       });
     });
@@ -104,7 +104,7 @@ router.get('/favorites', function(req, res) {
           });
           result.favorites = results;
 
-          res.render('user_home', { title: 'HomeTap', user: result, beers: result.favorites });
+          res.render('user_home', { title: 'HomeTap', user: result, choose: result, beers: result.favorites });
         });
       });
     });

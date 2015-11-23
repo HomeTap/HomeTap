@@ -14,10 +14,10 @@ block content
         ul.nav.navbar-nav
           li
             a(href='/user') 
-              button.nav.active(class='btn navbar-btn' type='button') Home
+              button.nav(class='btn navbar-btn' type='button') Home
           li
             a(href='/user/beers')
-              button.nav(class='btn navbar-btn' type='button') Browse Beer 
+              button.nav.active(class='btn navbar-btn' type='button') Browse Beer 
           li
             a(href='/logout')
               button.nav(class='btn navbar-btn' type='button') Logout      
@@ -27,7 +27,7 @@ block content
       ul.list-group
         each category, index in categories
           li.categories.list-group-item
-            a.categories(href='/user/beers/category/#{index}') #{category}
+            a.categories(href='/user/beers/category/#{index}' class={selected: index == selected}) #{category}
 
     div.col-xs-10.col-md-6
       table.table.table-striped

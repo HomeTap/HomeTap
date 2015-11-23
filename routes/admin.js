@@ -19,7 +19,7 @@ function renderAdminLibrary(req, res, def, categoryId) {
 
     Beer.find({ categoryId: category }).lean().exec(function(error, results) {
       if (error) throw error;
-      res.render('admin_lib', { categories: categories, beers: results });
+      res.render('admin_lib', { categories: categories, selected: category, beers: results });
     });
   });
 }

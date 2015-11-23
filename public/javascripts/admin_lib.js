@@ -1,14 +1,12 @@
 $(function() {
-
-  $('.deleteButton').click(function(){
-    var element = $(this);
+  $('.deleteButton').click(function() {
+    var self = $(this);
 
     $.ajax({
-      method: 'DELETE',
       url: '/admin/beers/' + this.dataset.id,
-      success: function(){
-        element.parent().parent().remove();
-      }
+      method: 'DELETE'
+    }).done(function() {
+      self.parent().parent().remove();
     });
   });
 });

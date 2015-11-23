@@ -1,10 +1,10 @@
 $(function() {
-
   $('.fulfillOrder').click(function() {
     var self = $(this);
+
     $.ajax({
-      method: 'PUT',
-      url: '/admin/' + this.dataset.id
+      url: '/admin/' + this.dataset.id,
+      method: 'PUT'
     }).done(function() {
       self.parent().parent().remove();
     });

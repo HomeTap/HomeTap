@@ -1,6 +1,7 @@
 extends layout
 
 block content
+<<<<<<< HEAD
   header
     img(src='/images/hometap.jpg')
 
@@ -13,8 +14,25 @@ block content
             a(href='/') User Orders
           li
             a(href='/admin/beers') Manage Beer Listings
+=======
+  nav.navbar.navbar-default
+    div.container-fluid
+      div.navbar-header
+        button(type="btn" class="navbar-toggle" data-toggle="collapse")
+        a(href='/user')
+          img.nav(src='/images/HomeTap.jpg')
+      div(class='collapse navbar-collapse' id='spy-scroll-id')
+        ul.nav.navbar-nav
+>>>>>>> NewStyle
           li
-            a(href='/logout') Logout
+            a(href='/admin') 
+              button.nav.active(class='btn navbar-btn' type='button') User Orders
+          li
+            a(href='/admin/beers')
+              button.nav(class='btn navbar-btn' type='button') Manage Beer Listings 
+          li
+            a(href='/logout')
+              button.nav(class='btn navbar-btn' type='button') Logout 
 
   .container
     table.table.table-striped.col-md-6

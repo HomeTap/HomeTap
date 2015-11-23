@@ -20,7 +20,13 @@ function renderAdminLibrary(req, res, def, categoryId) {
     Beer.find({ categoryId: category }).lean().exec(function(error, results) {
       if (error) throw error;
 
+<<<<<<< HEAD
       res.render('admin_lib', { categories: categories, beers: results });
+=======
+        if(error) throw error;
+        res.render('admin_lib', {categories: categories, beers: newBeers});
+      });
+>>>>>>> NewStyle
     });
   });
 }
@@ -44,10 +50,17 @@ router.post('/beers', function(req, res) {
 });
 
 router.delete('/beers/:id', function(req, res) {
+<<<<<<< HEAD
   Beer.findByIdAndRemove(req.params.id, function(error) {
     if (error) throw error;
     res.end();
   });
+=======
+    Beer.findByIdAndRemove(req.params.id, function(error) {
+      if(error) throw error;
+      res.end();
+    });
+>>>>>>> NewStyle
 });
 
 router.get('/beers/category/:id', function(req, res) {

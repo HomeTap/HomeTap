@@ -1,41 +1,45 @@
 extends layout
 
 block content
-  header
-    img(src='/images/hometap.jpg')
-
   nav.navbar.navbar-default
-    .container
-      .navbar-header
-      .navbar.navbar-collapse
+    div.container-fluid
+      div.navbar-header
+        button(type="btn" class="navbar-toggle" data-toggle="collapse")
+        a(href='/user')
+          img.nav(src='/images/HomeTap.jpg')
+      div.collapse.navbar-collapse
         ul.nav.navbar-nav
           li
-            a(href='/') User Orders
-          li.active
-            a(href='/admin/beers') Manage Beer Listings
+            a(href='/admin') 
+              button.nav(class='btn navbar-btn' type='button') User Orders
           li
-            a(href='/logout') Logout
-
-  .container
-    .col-xs-4.col-md-3
+            a(href='/admin/beers')
+              button.nav.active(class='btn navbar-btn' type='button') Manage Beer Listings 
+          li
+            a(href='/logout')
+              button.nav(class='btn navbar-btn' type='button') Logout 
+  div.categoryList
+    div.col-xs-4.col-md-3
       ul.list-group
         each category, index in categories
-          li.list-group-item
-            a(href='/admin/beers/category/#{index}') #{category}
+          li.categories.list-group-item
+            a.categories(href='/admin/beers/category/#{index}') #{category}
 
-    .col-xs-10.col-md-6
+    div.col-xs-10.col-md-6
       table.table.table-striped
         thead
           tr: th Beers
         tbody
           each beer in beers
             tr
-              td #{beer.name}
-              td: button(class='deleteButton' data-id='#{beer._id}') Delete
+              td #{beer.name} 
+                td
+                  button(class='btn deleteButton', data-id= '#{beer._id}') Delete
 
-    .container
-      .col-xs-4.col-md-3
-        form(action='/admin/beers' method='POST')
+    div.container
+      div.row
+        div.col-xs-8
+          form(action='/admin/beers' method='POST')
           h4 Add New Beer
           input(type='hidden' name='_method' value='add')
           label(for='name') Beer Name
@@ -46,13 +50,13 @@ block content
             option(value='' selected='selected')
             each category, index in categories
               option(value='#{index}') #{category}
-          br
           label(for='description') Description
           input(type='text' name='description' placeholder='Descripton')
           br
           label(for='stars') Stars
           input(type='text' name='stars' placeholder='Stars')
           br
-          input(type='submit' name='Add Beer' text='Add Beer')
+          button.submit(class='btn btn primary' type='submit') Submit
+          
 
-  script(type='text/javascript' src='/javascripts/admin_lib.js')
+  script(type='text/javascript', src='/javascript/adminLib.js')

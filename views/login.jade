@@ -2,23 +2,23 @@ extends layout
 
 block content
   header
-    img(src='/images/hometap.jpg')
-
-  .container
+    img(src='/images/HomeTap.jpg')
+  .container    
     h2 Login Page
-    .login
-      form(class='form-group' action='/login' method='POST')
-        label(for='username') Enter E-mail
-        &nbsp;&nbsp;
-        input(class='form-control' type='email' name='username' placeholder='E-mail')
-        br
-        label(for='password') Enter Password
-        &nbsp;&nbsp;
-        input(class='form-control' type='password' name='password' placeholder='Password')
-        br
-        button(class='btn btn-primary' type='submit') Log In
-        &nbsp;&nbsp;
-        a(href='/')
-          button(class='btn' type='button') Cancel
-
-        p #{message}
+    div.row
+      div.col-xs-8 
+        .login
+          form(class='form-group' action='/login' method='POST')
+            label(for='username') Enter E-mail
+            &nbsp;&nbsp;
+            input(class='form-control' type='email' name='username' placeholder='E-mail')
+            br
+            label(for='password') Enter Password
+            &nbsp;&nbsp;
+            input(class='form-control' type='password' name='password' placeholder='Password')
+            br
+            button(class='btn btn primary' type='submit') Log In
+            &nbsp;&nbsp;
+            a(href='/')
+              button(class='btn' type='button') Cancel
+          p #{message}

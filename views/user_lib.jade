@@ -2,42 +2,42 @@ extends layout
 
 block content
   header
-    img(src='/images/HomeTap.jpg')
+    img(src='/images/hometap.jpg')
     nav.navbar.navbar-default
-      div.container
-        div.navbar.navbar-collapse
+      .container
+        .navbar-header
+        .navbar.navbar-collapse
           ul.nav.navbar-nav
-            li.active
+            li
               a(href='/user') Home
+            li.active
+              a(href='/user/beers') Browse Beer
             li
-              a(href='/user/beers') Browse Beer 
-            li
-              a(href='/logout') Logout     
+              a(href='/logout') Logout
 
-  div.categorylist
+  .categorylist
     ul.list-group.col-xs-4.col-md-6
       each category, index in categorylist
         li.list-group-item
           a(href='/user/beers/category/#{index}') #{category}
 
-  div.col-xs-12.col-md-7
-    table(class='table table-striped ')
+  .col-xs-12.col-md-7
+    table.table.table-striped
       thead
         tr: th Beers
       tbody
-        each beer in beerlist
+        each beer in beers
           tr
-            td #{beer.name} 
+            td #{beer.name}
             td
               if (beer.favorite)
-                 button(class='favoriteButton', data-id='#{beer._id}', type='button') Un-Favorite
+                button(class='favoriteButton' data-id='#{beer._id}' type='button') Un-Favorite
               else
-                button(class='favoriteButton', data-id='#{beer._id}', type='button') Favorite
+                button(class='favoriteButton' data-id='#{beer._id}' type='button') Favorite
              td
               if (beer.inQueue)
-                button(class='queueButton', data-id='#{beer._id}' type='button') Remove From Queue
+                button(class='queueButton' data-id='#{beer._id}' type='button') Remove From Queue
               else
-                button(class='queueButton', data-id='#{beer._id}' type='button') Add To Queue
+                button(class='queueButton' data-id='#{beer._id}' type='button') Add To Queue
 
-  script(type='text/javascript', src='/javascript/userlib.js')
-
+  script(type='text/javascript' src='/javascripts/user_lib.js')

@@ -2,32 +2,31 @@ extends layout
 
 block content
   header
-    img(src='/images/HomeTap.jpg')
-  header.navbar.navbar-default
-    div.container
-      div.navbar-header
-      div.navbar.navbar-collapse
-        ul.nav.navbar-nav
-          li.active
-            a(href='/') User Orders
-          li 
-            a(href='/admin/beers') Manage Beer Listings
-          li
-            a(href='/logout') Logout
+    img(src='/images/hometap.jpg')
+    nav.navbar.navbar-default
+      .container
+        .navbar-header
+        .navbar.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+              a(href='/') User Orders
+            li
+              a(href='/admin/beers') Manage Beer Listings
+            li
+              a(href='/logout') Logout
 
-  div.container
-    table(class='table table-striped col-md-6')
+  .container
+    table.table.table-striped.col-md-6
       thead
         tr: th User Orders
         tr
-          th Username
+          th User Name
           th Beer
       tbody
         each user in userList
-          tr 
-            td #{user.screenName} 
-                td #{user.queue[0]}
-                  td
-                    button(class='btn fulfillOrder', data-id= '#{user._id}') Send Order
+          tr
+            td #{user.screenName}
+            td #{user.queue[0]}
+            td: button(class='btn fulfillOrder' data-id='#{user._id}') Send Order
 
-  script(type='text/javascript', src='/javascript/adminHome.js')
+  script(type='text/javascript' src='/javascripts/admin_home.js')

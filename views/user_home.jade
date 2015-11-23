@@ -2,27 +2,27 @@ extends layout
 
 block content
   header
-    img(src='/images/HomeTap.jpg')
+    img(src='/images/hometap.jpg')
     nav.navbar.navbar-default
-      div.container
-        div.navbar-header
-        div.navbar.navbar-collapse
+      .container
+        .navbar-header
+        .navbar.navbar-collapse
           ul.nav.navbar-nav
             li.active
               a(href='/user') Home
             li
-              a(href='/user/beers') Browse Beer 
+              a(href='/user/beers') Browse Beer
             li
-              a(href='/logout') Logout 
+              a(href='/logout') Logout
 
-  div.col-xs-18.col-md-12
-    table(class='table table-striped')
+  .col-xs-18.col-md-12
+    table.table.table-striped
       thead
         tr 
           th
             a(href='/')
               button() Queue
-          th 
+          th
             a(href='/user/favorites') 
               button() Favorites
         tr
@@ -32,13 +32,12 @@ block content
           th Stars
           th Remove
       tbody
-        each beer in beerlist
+        each beer in beers
           tr
-            td #{beer.name} 
+            td #{beer.name}
             td #{beer.description}
             td #{beer.category}
             td #{beer.stars}
-            td: button(class='removeFromList', data-id='#{beer._id}', type='button') Remove
+            td: button(class='removeFromList' data-id='#{beer._id}' type='button') Remove
 
-    script(type='text/javascript', src='/javascript/user_home.js')
-
+  script(type='text/javascript' src='/javascripts/user_home.js')

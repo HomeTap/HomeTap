@@ -26,7 +26,7 @@ function renderAdminLib(req, res, def, catID) {
         });
 
         if(error) throw error;
-        res.render('admin_lib', {categorylist: categories, cats: categories, beerlist: newBeers});
+        res.render('admin_lib', {categories: categories, beers: newBeers});
       });
     });
   });

@@ -8,7 +8,7 @@ block content
           span(class='icon-bar')
           span(class='icon-bar')
           span(class='icon-bar') 
-        a(href='/user')
+        a(href='/admin')
           img.nav(src='/images/hometap.jpg')
       div(class='collapse navbar-collapse' id='myNavbar')
         ul.nav.navbar-nav
@@ -21,13 +21,13 @@ block content
           li
             a(href='/logout')
               button.nav(class='btn navbar-btn' type='button') Logout 
-              
+
   div.categoryList
     div.col-xs-4.col-md-3
       ul.list-group
         each category, index in categories
           li.categories.list-group-item
-            a.categories(href='/user/beers/category/#{index}' class={selected: index == selected}) #{category}
+            a.categories(href='/admin/beers/category/#{index}' class={selected: index == selected}) #{category}
 
     div.col-xs-10.col-md-6
       table.table.table-striped

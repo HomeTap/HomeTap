@@ -1,19 +1,23 @@
 extends layout
 
 block content
-  header
-    img(src='/images/HomeTap.jpg')
   nav.navbar.navbar-default
-    div.container
+    div.container-fluid
       div.navbar-header
-      div.navbar.navbar-collapse
+        button(type="btn" class="navbar-toggle" data-toggle="collapse")
+        a(href='/user')
+          img.nav(src='/images/HomeTap.jpg')
+      div(class='collapse navbar-collapse' id='spy-scroll-id')
         ul.nav.navbar-nav
           li
-            a(href='/') User Orders
-          li.active
-            a(href='/admin/beers') Manage Beer Listings
+            a(href='/admin') 
+              button.nav(class='btn navbar-btn' type='button') User Orders
           li
-            a(href='/logout') Logout
+            a(href='/admin/beers')
+              button.nav(class='btn navbar-btn' type='button') Manage Beer Listings 
+          li
+            a(href='/logout')
+              button.nav(class='btn navbar-btn' type='button') Logout 
 
   div.container
     div.col-xs-4.col-md-3
@@ -31,25 +35,26 @@ block content
             tr
               td #{beer.name} 
                 td
-                  button(class='deleteButton', data-id= '#{beer._id}') Delete
+                  button(class='btn deleteButton', data-id= '#{beer._id}') Delete
 
     div.container
-      div.col-xs-4.col-md-3
-        form(method='POST', action='/admin/beers')
-          h4 Add New Beer
-          input(type='hidden', name='_method', value='add') 
-          input(type='text', name='name', placeholder='Beer Name')
-          p Beer Name
-          select(name='categoryId', placeholder='Category')
-            option(value='', selected='selected')
-              each cat, index in cats
-                option(value='#{index}') #{cat}
-          p Category
-          input(type='text', name='description', placeholder='Descripton')
-          p Description
-          input(type='number', name='stars', placeholder='Stars')
-          p Stars
-          input(type='submit', name='Add Beer', text='Add Beer')
+      div.row
+        div.col-xs-8
+          form(method='POST', action='/admin/beers')
+            h4 Add New Beer
+            input(type='hidden', name='_method', value='add') 
+            input(type='text', name='name', placeholder='Beer Name')
+            p Beer Name
+            select(name='categoryId', placeholder='Category')
+              option(value='', selected='selected')
+                each cat, index in cats
+                  option(value='#{index}') #{cat}
+            p Category
+            input(type='text', name='description', placeholder='Descripton')
+            p Description
+            input(type='number', name='stars', placeholder='Stars')
+            p Stars
+            input(type='submit', name='Add Beer', text='Add Beer')
 
   script(type='text/javascript', src='/javascript/adminLib.js')
 

@@ -1,19 +1,23 @@
 extends layout
 
 block content
-  header
-    img(src='/images/HomeTap.jpg')
-  header.navbar.navbar-default
-    div.container
+  nav.navbar.navbar-default
+    div.container-fluid
       div.navbar-header
-      div.navbar.navbar-collapse
+        button(type="btn" class="navbar-toggle" data-toggle="collapse")
+        a(href='/user')
+          img.nav(src='/images/HomeTap.jpg')
+      div(class='collapse navbar-collapse' id='spy-scroll-id')
         ul.nav.navbar-nav
-          li.active
-            a(href='/') User Orders
-          li 
-            a(href='/admin/beers') Manage Beer Listings
           li
-            a(href='/logout') Logout
+            a(href='/admin') 
+              button.nav(class='btn navbar-btn' type='button') User Orders
+          li
+            a(href='/admin/beers')
+              button.nav(class='btn navbar-btn' type='button') Manage Beer Listings 
+          li
+            a(href='/logout')
+              button.nav(class='btn navbar-btn' type='button') Logout 
 
   div.container
     table(class='table table-striped col-md-6')

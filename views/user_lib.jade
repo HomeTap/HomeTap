@@ -1,43 +1,51 @@
 extends layout
 
 block content
-  header
-    img(src='/images/HomeTap.jpg')
-    nav.navbar.navbar-default
-      div.container
-        div.navbar.navbar-collapse
-          ul.nav.navbar-nav
-            li.active
-              a(href='/user') Home
-            li
-              a(href='/user/beers') Browse Beer 
-            li
-              a(href='/logout') Logout     
+  nav.navbar.navbar-default
+    div.container-fluid
+      div.navbar-header
+        button(type='btn' class='navbar-toggle' data-toggle='collapse' data-target='#myNavbar')
+          span(class='icon-bar')
+          span(class='icon-bar')
+          span(class='icon-bar') 
+        a(href='/user')
+          img.nav(src='/images/hometap.jpg')
+      div(class='collapse navbar-collapse' id='myNavbar')
+        ul.nav.navbar-nav
+          li
+            a(href='/user') 
+              button.nav.active(class='btn navbar-btn' type='button') Home
+          li
+            a(href='/user/beers')
+              button.nav(class='btn navbar-btn' type='button') Browse Beer 
+          li
+            a(href='/logout')
+              button.nav(class='btn navbar-btn' type='button') Logout      
 
-  div.categorylist
-    ul.list-group.col-xs-4.col-md-6
-      each category, index in categorylist
-        li.list-group-item
-          a(href='/user/beers/category/#{index}') #{category}
+  div.categoryList
+    div.col-xs-4.col-md-3
+      ul.list-group
+        each category, index in categories
+          li.categories.list-group-item
+            a.categories(href='/user/beers/category/#{index}') #{category}
 
-  div.col-xs-12.col-md-7
-    table(class='table table-striped ')
-      thead
-        tr: th Beers
-      tbody
-        each beer in beerlist
-          tr
-            td #{beer.name} 
-            td
-              if (beer.favorite)
-                 button(class='favoriteButton', data-id='#{beer._id}', type='button') Un-Favorite
-              else
-                button(class='favoriteButton', data-id='#{beer._id}', type='button') Favorite
-             td
-              if (beer.inQueue)
-                button(class='queueButton', data-id='#{beer._id}' type='button') Remove From Queue
-              else
-                button(class='queueButton', data-id='#{beer._id}' type='button') Add To Queue
+    div.col-xs-10.col-md-6
+      table.table.table-striped
+        thead
+          tr: th Beers
+        tbody
+          each beer in beers
+            tr
+              td #{beer.name} 
+                td
+                  if (beer.favorite)
+                    button(class='btn favoriteButton', data-id='#{beer._id}', type='button') Un-Favorite
+                  else
+                    button(class='btn favoriteButton', data-id='#{beer._id}', type='button') Favorite
+                td
+                  if (beer.inQueue)
+                    button(class='btn queueButton', data-id='#{beer._id}' type='button') Remove From Queue
+                  else
+                    button(class='btn queueButton', data-id='#{beer._id}' type='button') Add To Queue
 
-  script(type='text/javascript', src='/javascript/userlib.js')
-
+  script(type='text/javascript' src='/javascripts/user_lib.js')

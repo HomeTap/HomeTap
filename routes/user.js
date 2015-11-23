@@ -5,17 +5,19 @@ var User = require('../models/user');
 var Category = require('../models/category');
 var Beer = require('../models/beer');
 
-function renderLibrary(req, res, def) {
-  User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
-    var favs = result.favorites.map(function(favorite) {
-      return favorite.toString();
+function renderUserLibrary(req, res, def) {
+  User.findOne({ userIdString: req.user._id }).lean().exec(function(error, result) {
+    if (error) throw error;
+    var favs = result.favorites.map(function(element) {
+      return element.toString();
     });
-    var que = result.queue.map(function(q) {
-      return q.toString();
+    var que = result.queue.map(function(element) {
+      return element.toString();
     });
     var categories = {};
 
     Category.find({}, function(error, results) {
+      if (error) throw error;
       var category = results[0]._id;
       if (!def) category = req.params.id;
 
@@ -23,16 +25,15 @@ function renderLibrary(req, res, def) {
         categories[element._doc._id.toString()] = element._doc.category;
       });
 
-      if(error) throw error;
-      Beer.find({categoryId: category}).lean().exec(function(error, beers) {
-        var newBeers = beers.map(function(beer) {
-          beer.favorite = (favs.indexOf(beer._id.toString()) < 0 ? false : true);
-          beer.inQueue = (que.indexOf(beer._id.toString()) < 0 ? false : true);
-          return beer;
+      Beer.find({ categoryId: category }).lean().exec(function(error, results) {
+        if (error) throw error;
+        var beers = results.map(function(element) {
+          element.favorite = (favs.indexOf(element._id.toString()) < 0 ? false : true);
+          element.inQueue = (que.indexOf(element._id.toString()) < 0 ? false : true);
+          return element;
         });
 
-        if(error) throw error;
-        res.render('user_lib', {categorylist: categories, beerlist: newBeers});
+        res.render('user_lib', {categories: categories, beers: beers});
       });
     });
   });
@@ -67,7 +68,7 @@ router.get('/', function (req, res) {
           });
           result.favorites = results;
 
-          res.render('user_home', { title: 'HomeTap', user: result, beerlist: result.queue });
+          res.render('user_home', { title: 'HomeTap', user: result, beers: result.queue });
         });
       });
     });
@@ -103,7 +104,7 @@ router.get('/favorites', function(req, res) {
           });
           result.favorites = results;
 
-          res.render('user_home', { title: 'HomeTap', user: result, beerlist: result.favorites });
+          res.render('user_home', { title: 'HomeTap', user: result, beers: result.favorites });
         });
       });
     });
@@ -111,29 +112,29 @@ router.get('/favorites', function(req, res) {
 });
 
 router.get('/beers', function (req, res) {
-  renderLibrary(req, res, true);
+  renderUserLibrary(req, res, true);
 });
 
 router.get('/beers/category/:id', function(req, res) {
-  renderLibrary(req, res, false);
+  renderUserLibrary(req, res, false);
 });
 
 router.put('/beers/favorite/:id', function(req, res) {
-  User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
+  User.findOne({ userIdString: req.user._id }).lean().exec(function(error, result) {
     if (error) throw error;
-    var favs = result.favorites.map(function(favorite) {
-      return favorite.toString();
+    var favs = result.favorites.map(function(element) {
+      return element.toString();
     });
     if (favs.indexOf(req.params.id) < 0 ? false : true) {
       favs.splice(favs.indexOf(req.params.id), 1);
-      User.update({userIdString: req.user._id}, {$set: {favorites: favs}}, function(error) {
+      User.update({ userIdString: req.user._id }, { $set: { favorites: favs } }, function(error) {
         if (error) throw error;
         res.end();
       });
     } else {
       favs.push(req.params.id);
 
-      User.update({userIdString: req.user._id}, {$set: {favorites: favs}}, function(error) {
+      User.update({ userIdString: req.user._id }, { $set: { favorites: favs } }, function(error) {
         if (error) throw error;
         res.end();
       });
@@ -142,25 +143,25 @@ router.put('/beers/favorite/:id', function(req, res) {
 });
 
 router.get('/beers/favorite/:id', function(req, res) {
-  renderLibrary(req, res, false);
+  renderUserLibrary(req, res, false);
 });
 
 router.put('/beers/queue/:id', function(req, res) {
-  User.findOne({userIdString: req.user._id}).lean().exec(function(error, result) {
+  User.findOne({ userIdString: req.user._id }).lean().exec(function(error, result) {
     if (error) throw error;
-    var que = result.queue.map(function(q) {
-      return q.toString();
+    var que = result.queue.map(function(element) {
+      return element.toString();
     });
     if (que.indexOf(req.params.id) < 0 ? false : true) {
       que.splice(que.indexOf(req.params.id), 1);
-      User.update({userIdString: req.user._id}, {$set: {queue: que}}, function(error) {
+      User.update({ userIdString: req.user._id }, { $set: { queue: que } }, function(error) {
         if (error) throw error;
         res.end();
       });
     } else {
       que.push(req.params.id);
 
-      User.update({userIdString: req.user._id}, {$set: {queue: que}}, function(error) {
+      User.update({ userIdString: req.user._id }, { $set: { queue: que } }, function(error) {
         if (error) throw error;
         res.end();
       });

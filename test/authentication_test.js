@@ -1,7 +1,7 @@
-var chai = require('chai'),
-    chaiHttp = require('chai-http');
-
+var chai = require('chai');
+var chaiHttp = require('chai-http');
 var expect = chai.expect;
+
 var baseURL = 'http://localhost:3000';
 
 require('../app.js');
@@ -11,7 +11,7 @@ describe('Test Authentication', function() {
   it('Test No Authentication', function(done) {
     chai.request(baseURL)
       .get('/admin/beers')
-      .end(function(err, res){
+      .end(function(err, res) {
         expect(res.status).to.equal(401);
         done();
       });
@@ -21,7 +21,7 @@ describe('Test Authentication', function() {
     var admin = chai.request.agent(baseURL);
 
     admin.post('/login')
-      .send({username: 'admin', password: 'password'})
+      .send({ username: 'admin', password: 'password' })
       .then(function(res) {
         console.log(res);
         expect(res).to.have.cookie('sessionid');
@@ -48,6 +48,4 @@ describe('Test Authentication', function() {
   //       expect(res.status).to.equal(200);
   //     });
   // });
-
-
 });

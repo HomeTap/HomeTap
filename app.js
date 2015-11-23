@@ -29,7 +29,7 @@ app.set('env', process.env.NODE_ENV);
 app.use(express.static(__dirname + '/public'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
   secret: 'secret',
@@ -41,11 +41,9 @@ app.use(passport.session());
 
 function ensureAuthenticatedUser (req, res, next) {
   if (req.isAuthenticated()) {
-    return User.findOne({userIdString: req.user._id}, function(error, result) {
+    return User.findOne({ userIdString: req.user._id }, function(error, result) {
       if (error) throw error;
-      if (!result.isAdmin) {
-        return next();
-      }
+      if (!result.isAdmin) return next();
     });
   }
   var err = new Error('Unauthorized');
@@ -55,9 +53,9 @@ function ensureAuthenticatedUser (req, res, next) {
 
 function ensureAuthenticatedAdmin (req, res, next) {
   if (req.isAuthenticated()) {
-    return User.findOne({userIdString: req.user._id}, function(error, result) {
+    return User.findOne({ userIdString: req.user._id }, function(error, result) {
       if (error) throw error;
-      if (result.isAdmin) { return next(); }
+      if (result.isAdmin) return next();
     });
   }
   var err = new Error('Unauthorized');
@@ -90,5 +88,5 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(port, function() {
-  console.log('Listening on port', port, '...what a great day!');
+  console.log('Listening on port', port, '... what a great day!');
 });

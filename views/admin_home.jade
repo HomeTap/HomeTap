@@ -1,33 +1,39 @@
 extends layout
 
 block content
-  header
-    img(src='/images/HomeTap.jpg')
-  header.navbar.navbar-default
-    div.container
+  nav.navbar.navbar-default
+    div.container-fluid
       div.navbar-header
-      div.navbar.navbar-collapse
+        button(type='btn' class='navbar-toggle' data-toggle='collapse' data-target='#myNavbar')
+          span(class='icon-bar')
+          span(class='icon-bar')
+          span(class='icon-bar') 
+        a(href='/user')
+          img.nav(src='/images/hometap.jpg')
+      div(class='collapse navbar-collapse' id='myNavbar')
         ul.nav.navbar-nav
-          li.active
-            a(href='/') User Orders
-          li 
-            a(href='/admin/beers') Manage Beer Listings
           li
-            a(href='/logout') Logout
+            a(href='/admin') 
+              button.nav.active(class='btn navbar-btn' type='button') User Orders
+          li
+            a(href='/admin/beers')
+              button.nav(class='btn navbar-btn' type='button') Manage Beer Listings 
+          li
+            a(href='/logout')
+              button.nav(class='btn navbar-btn' type='button') Logout 
 
-  div.container
-    table(class='table table-striped col-md-6')
+  .container
+    table.table.table-striped.col-md-6
       thead
         tr: th User Orders
         tr
-          th Username
+          th User Name
           th Beer
       tbody
-        each user in userList
-          tr 
-            td #{user.screenName} 
-                td #{user.queue[0]}
-                  td
-                    button(class='btn fulfillOrder', data-id= '#{user._id}') Send Order
+        each user in users
+          tr
+            td #{user.screenName}
+            td #{user.queue[0]}
+            td: button(class='btn fulfillOrder' data-id='#{user._id}') Send Order
 
-  script(type='text/javascript', src='/javascript/adminHome.js')
+  script(type='text/javascript' src='/javascripts/admin_home.js')

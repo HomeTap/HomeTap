@@ -2,32 +2,35 @@ extends layout
 
 block content
   header
-  img(src='/images/HomeTap.jpg')
-  h2 Registration Page
-  div 
-    form(action='/register' method='POST')
-      label(for='screenName') Enter Screen Name
-      &nbsp;&nbsp;
-      input(class="form-control" type='text' name='screenName' placeholder='Screen Name')
-      br
-      label(for='username') Enter E-mail
-      &nbsp;&nbsp;
-      input(class="form-control" type='email' name='username' placeholder='E-mail')
-      br
-      label(for='password') Enter Password
-      &nbsp;&nbsp;
-      input(class="form-control" type='password' name='password' placeholder='Password')
-      br
-      p Choose Your Subscription
-        select(name='subscription')
-          option(value='' selected='selected')
-          option(value='64 Oz. Per Week') 64 Oz. Per Week
-          option(value='128 Oz. Per Week') 128 Oz. Per Week
-      
-      br
-      button(type='submit') Sign Up
-      &nbsp;&nbsp;
-      a(href='/')
-        button(type='button') Cancel
+    img(src='/images/hometap.jpg')
+  .container    
+    h2 Registration Page
+    div.row
+      div.col-xs-8
+        form(action='/register' method='POST')
+          label(for='screenName') Enter Screen Name
+          &nbsp;&nbsp;
+          input(class='form-control' type='text' name='screenName' placeholder='Screen Name')
+          br
+          label(for='username') Enter E-mail
+          &nbsp;&nbsp;
+          input(class='form-control' type='email' name='username' placeholder='E-mail')
+          br
+          label(for='password') Enter Password
+          &nbsp;&nbsp;
+          input(class='form-control' type='password' name='password' placeholder='Password')
+          br
+          p Choose Your Subscription
+          br
+          select(name='subscription')
+            option(value='' selected='selected')
+            option(value='64 Oz. Per Week') 64 Oz. Per Week
+            option(value='128 Oz. Per Week') 128 Oz. Per Week
+          br    
+          div.buttonbottom   
+            button(class='btn' type='submit') Sign Up
+            &nbsp;&nbsp;
+            a(href='/')
+              button(class='btn' type='button') Cancel
 
-      p #{message}
+        p #{message}

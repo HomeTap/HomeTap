@@ -1,18 +1,17 @@
 {
-  "name": "hometap",
+  "name": "HomeTap",
   "version": "1.0.0",
   "description": "Application for users to browse a library of beers, add them to a queue, and receive deliveries from local breweries.",
   "main": "app.js",
   "scripts": {
-    "start": "node app",
-    "debug": "nodemon --exec './node_modules/.bin/nf start'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "debug": "nodemon --exec './node_modules/.bin/nf start'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HomeTap/HomeTap.git"
   },
-  "author": "",
+  "author": "Jeff Dunn, Tara Kreft, Peter Madsen",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/HomeTap/HomeTap/issues"

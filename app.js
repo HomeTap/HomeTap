@@ -42,7 +42,7 @@ function ensureAuthenticatedUser (req, res, next) {
   if (req.isAuthenticated()) {
     return User.findOne({ userIdString: req.user._id }, function(error, result) {
       if (error) throw error;
-      if (!result.isAdmin) { return next(); }
+      if (!result.isAdmin) return next();
     });
   }
   var err = new Error('Unauthorized');
@@ -54,7 +54,7 @@ function ensureAuthenticatedAdmin (req, res, next) {
   if (req.isAuthenticated()) {
     return User.findOne({ userIdString: req.user._id }, function(error, result) {
       if (error) throw error;
-      if (result.isAdmin) { return next(); }
+      if (result.isAdmin) return next();
     });
   }
   var err = new Error('Unauthorized');

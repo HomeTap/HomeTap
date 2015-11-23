@@ -40,7 +40,9 @@ PORT=3000
 ```
 Where 'database' is the path to the database that you are using (this could contain authentication for remote services).
 
-Then run the ```npm install``` command to add all of the package dependencies.
+Then run the ```npm install``` command to add all of the package dependencies. 
+
+Currently also you must manually configure the administrator user in the database by setting the isAdmin field to true for the desired user. 
 
 ####Test
 Tests where created using mocha and chai/chai-http. All tests are contained in the test directory inside of the root directory. To run a test use the mocha command in the terminal along with the name of the test file.

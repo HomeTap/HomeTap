@@ -3,17 +3,18 @@ extends layout
 block content
   header
     img(src='/images/hometap.jpg')
-    nav.navbar.navbar-default
-      .container
-        .navbar-header
-        .navbar.navbar-collapse
-          ul.nav.navbar-nav
-            li
-              a(href='/') User Orders
-            li.active
-              a(href='/admin/beers') Manage Beer Listings
-            li
-              a(href='/logout') Logout
+
+  nav.navbar.navbar-default
+    .container
+      .navbar-header
+      .navbar.navbar-collapse
+        ul.nav.navbar-nav
+          li
+            a(href='/') User Orders
+          li.active
+            a(href='/admin/beers') Manage Beer Listings
+          li
+            a(href='/logout') Logout
 
   .container
     .col-xs-4.col-md-3
@@ -37,17 +38,21 @@ block content
         form(action='/admin/beers' method='POST')
           h4 Add New Beer
           input(type='hidden' name='_method' value='add')
+          label(for='name') Beer Name
           input(type='text' name='name' placeholder='Beer Name')
-          p Beer Name
+          br
+          label(for='categoryId') Category
           select(name='categoryId')
             option(value='' selected='selected')
             each category, index in categories
               option(value='#{index}') #{category}
-          p Category
+          br
+          label(for='description') Description
           input(type='text' name='description' placeholder='Descripton')
-          p Description
-          input(type='number' name='stars' placeholder='Stars')
-          p Stars
+          br
+          label(for='stars') Stars
+          input(type='text' name='stars' placeholder='Stars')
+          br
           input(type='submit' name='Add Beer' text='Add Beer')
 
   script(type='text/javascript' src='/javascripts/admin_lib.js')

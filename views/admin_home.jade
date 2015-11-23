@@ -3,17 +3,18 @@ extends layout
 block content
   header
     img(src='/images/hometap.jpg')
-    nav.navbar.navbar-default
-      .container
-        .navbar-header
-        .navbar.navbar-collapse
-          ul.nav.navbar-nav
-            li.active
-              a(href='/') User Orders
-            li
-              a(href='/admin/beers') Manage Beer Listings
-            li
-              a(href='/logout') Logout
+
+  nav.navbar.navbar-default
+    .container
+      .navbar-header
+      .navbar.navbar-collapse
+        ul.nav.navbar-nav
+          li.active
+            a(href='/') User Orders
+          li
+            a(href='/admin/beers') Manage Beer Listings
+          li
+            a(href='/logout') Logout
 
   .container
     table.table.table-striped.col-md-6

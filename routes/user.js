@@ -39,7 +39,7 @@ function renderUserLibrary(req, res, def) {
   });
 }
 
-router.get('/', function (req, res) {
+router.get('/', function(req, res) {
   var categories = {};
   User.findOne({ userIdString: req.user._id }, function(error, result) {
     if (error) throw error;
@@ -111,7 +111,7 @@ router.get('/favorites', function(req, res) {
   });
 });
 
-router.get('/beers', function (req, res) {
+router.get('/beers', function(req, res) {
   renderUserLibrary(req, res, true);
 });
 

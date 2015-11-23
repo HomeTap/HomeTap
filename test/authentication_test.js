@@ -16,7 +16,7 @@ describe('Test Authentication', function() {
         done();
       });
   });
-  
+
   it('Test Admin Authentication', function(done) {
     var admin = chai.request.agent(baseURL);
 

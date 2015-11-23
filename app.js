@@ -24,6 +24,7 @@ passport.deserializeUser(Account.deserializeUser());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.set('port', port);
+app.set('env', process.env.NODE_ENV);
 
 app.use(express.static(__dirname + '/public'));
 app.use(logger('dev'));
@@ -72,10 +73,18 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// development error handler will print stacktrace
+if (app.get('env') === 'development') {
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', { title: err.message, error: err });
+  });
+}
+
+// production error handler with no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {title: err.message, error: err});
-  console.log(next);
+  res.render('error', { title: err.message, error: { message: err.message, status: err.status } });
 });
 
 app.listen(port, function() {

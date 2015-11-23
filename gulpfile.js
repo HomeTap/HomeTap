@@ -3,7 +3,7 @@ var jshint = require('gulp-jshint');
 var jscs = require('gulp-jscs');
 var mocha = require('gulp-mocha');
 
-var jsPaths = [ './*.js', 'models/*.js', 'public/javascripts/*.js', 'routes/*.js', 'test/*.js' ];
+var jsPaths = ['./*.js', 'models/*.js', 'public/javascripts/*.js', 'routes/*.js', 'test/*.js'];
 
 gulp.task('jsLint', function() {
   return gulp.src(jsPaths)
@@ -23,4 +23,4 @@ gulp.task('test', function() {
     .pipe(mocha());
 });
 
-gulp.task('default', [ 'jsLint', 'jsStyle' ]);
+gulp.task('default', ['jsLint', 'jsStyle']);

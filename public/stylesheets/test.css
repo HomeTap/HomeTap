@@ -7,10 +7,6 @@ input, li {
   border-radius: 10;
 }
 
-h1 {
-  margin: 10px;
-}
-
 p {
   margin-left: 40px;
   margin-top:  10px;
@@ -30,6 +26,10 @@ nav.navbar.navbar-default {
     background: #490102;
     border: none;
     padding: 10px;
+}
+
+.active, {
+    color: #402A19;
 }
 
 h1 {
@@ -77,12 +77,21 @@ button {
     background: #a7873c;
 }
 
+.submit {
+    margin-bottom: 20px;
+}
+
 .buttonbottom {
     margin-left: 40px;
 }
 
-table {
-    border-color: #402A19;
+.categories {
+    background: #FFCD9C;
+    color: #402A19;
+}
+
+a:hover, a:active {
+    color: white;
 }
 
 table.table.table-striped {

@@ -7,31 +7,31 @@ block content
         button(type="btn" class="navbar-toggle" data-toggle="collapse")
         a(href='/user')
           img.nav(src='/images/HomeTap.jpg')
-      div(class='collapse navbar-collapse' id='spy-scroll-id')
+      div.collapse.navbar-collapse
         ul.nav.navbar-nav
           li
             a(href='/admin') 
               button.nav(class='btn navbar-btn' type='button') User Orders
           li
             a(href='/admin/beers')
-              button.nav(class='btn navbar-btn' type='button') Manage Beer Listings 
+              button.nav.active(class='btn navbar-btn' type='button') Manage Beer Listings 
           li
             a(href='/logout')
               button.nav(class='btn navbar-btn' type='button') Logout 
 
-  div.container
+  div.categoryList
     div.col-xs-4.col-md-3
       ul.list-group
-        each category, index in categorylist
+        each category, index in categories
           li.list-group-item
-            a(href='/admin/beers/category/#{index}') #{category}
+            a.categories(href='/admin/beers/category/#{index}') #{category}
 
     div.col-xs-10.col-md-6
-      table(class='table table-striped ')
+      table.table.table-striped
         thead
           tr: th Beers
         tbody
-          each beer in beerlist
+          each beer in beers
             tr
               td #{beer.name} 
                 td
@@ -40,21 +40,26 @@ block content
     div.container
       div.row
         div.col-xs-8
-          form(method='POST', action='/admin/beers')
-            h4 Add New Beer
-            input(type='hidden', name='_method', value='add') 
-            input(type='text', name='name', placeholder='Beer Name')
-            p Beer Name
-            select(name='categoryId', placeholder='Category')
-              option(value='', selected='selected')
-                each cat, index in cats
-                  option(value='#{index}') #{cat}
-            p Category
-            input(type='text', name='description', placeholder='Descripton')
-            p Description
-            input(type='number', name='stars', placeholder='Stars')
-            p Stars
-            input(type='submit', name='Add Beer', text='Add Beer')
+          form(action='/admin/beers' method='POST')
+          h4 Add New Beer
+          input(type='hidden' name='_method' value='add')
+          label(for='name') Beer Name
+          input(type='text' name='name' placeholder='Beer Name')
+          br
+          label(for='categoryId') Category
+          select(name='categoryId')
+            option(value='' selected='selected')
+            each category, index in categories
+              option(value='#{index}') #{category}
+          br
+          label(for='description') Description
+          input(type='text' name='description' placeholder='Descripton')
+          br
+          label(for='stars') Stars
+          input(type='text' name='stars' placeholder='Stars')
+          br
+          button.submit(class='btn btn primary' type='submit') Submit
+          
 
   script(type='text/javascript', src='/javascript/adminLib.js')
 

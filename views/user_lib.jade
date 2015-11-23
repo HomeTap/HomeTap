@@ -4,17 +4,20 @@ block content
   nav.navbar.navbar-default
     div.container-fluid
       div.navbar-header
-        button(type="btn" class="navbar-toggle" data-toggle="collapse")
+        button(type='btn' class='navbar-toggle' data-toggle='collapse' data-target='#myNavbar')
+          span(class='icon-bar')
+          span(class='icon-bar')
+          span(class='icon-bar') 
         a(href='/user')
           img.nav(src='/images/hometap.jpg')
-      div.collapse.navbar-collapse
+      div(class='collapse navbar-collapse' id='myNavbar')
         ul.nav.navbar-nav
           li
             a(href='/user') 
-              button.nav(class='btn navbar-btn' type='button') Home
+              button.nav.active(class='btn navbar-btn' type='button') Home
           li
             a(href='/user/beers')
-              button.nav.active(class='btn navbar-btn' type='button') Browse Beer 
+              button.nav(class='btn navbar-btn' type='button') Browse Beer 
           li
             a(href='/logout')
               button.nav(class='btn navbar-btn' type='button') Logout      

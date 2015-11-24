@@ -28,10 +28,10 @@ block content
         tr 
           th
             a(href='/user')
-              button(class='btn' type='button') Queue
+              button.btn(class={choose: index == choose} type='button') Queue
           th 
             a(href='/user/favorites') 
-              button(class='btn' type='button') Favorites
+              button.btn(class={select: index == select} type='button') Favorites
         tr
           th Beer Name
           th Description

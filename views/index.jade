@@ -3,11 +3,16 @@ extends layout
 block content
   header
     img(src='/images/hometap.jpg')
-  br
-  .container.index
-    a(href='/login') 
-      button(class="btn" type='submit') Log In
-    br
-    br
-    a(href='/register') 
-          button(class="btn" type='button') Register 
+  .container    
+    h2 Login Page
+    div.row
+      div.col-xs-8 
+        .login
+          br
+          .container.index
+            a(href='/login') 
+              button(class="btn" type='submit') Log In
+            br
+            br
+            a(href='/register') 
+                  button(class="btn" type='button') Register 

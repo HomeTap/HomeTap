@@ -12,6 +12,11 @@ p {
   margin-top:  10px;
 }
 
+p.reg {
+  margin-left: 0;
+  margin-top:  10px;   
+}
+
 form {
   margin-left: 40px; 
 }
@@ -82,7 +87,7 @@ button {
 }
 
 .buttonbottom {
-    margin-left: 40px;
+    margin-top: 40px;
 }
 
 .categories {
@@ -92,6 +97,14 @@ button {
 
 a:hover {
     color: white;
+}
+
+a.categories.selected {
+    color: white;
+}
+
+button.btn.select, button.btn.choose {
+    color: #402A19;
 }
 
 table.table.table-striped {
@@ -115,8 +128,8 @@ img.nav {
     margin-left: 0;
 }
 
-.index {
-    margin-left: 60px;
+.container.index {
+    margin-left: 25px;
 }
 
 

@@ -1,17 +1,9 @@
-'use strict';
+var gulp = require('gulp');
+var jshint = require('gulp-jshint');
+var jscs = require('gulp-jscs');
+var mocha = require('gulp-mocha');
 
-var gulp = require('gulp'),
-    jshint = require('gulp-jshint'),
-    jscs = require('gulp-jscs'),
-    mocha = require('gulp-mocha');
-
-var jsPaths = ['models/*.js', './*.js', 'test/*.js'];
-
-gulp.task('jsStyle', function() {
-  return gulp.src(jsPaths)
-    .pipe(jscs())
-    .pipe(jscs.reporter());
-});
+var jsPaths = ['./*.js', 'models/*.js', 'public/javascripts/*.js', 'routes/*.js', 'test/*.js'];
 
 gulp.task('jsLint', function() {
   return gulp.src(jsPaths)
@@ -20,9 +12,15 @@ gulp.task('jsLint', function() {
   .pipe(jshint.reporter('fail'));
 });
 
+gulp.task('jsStyle', function() {
+  return gulp.src(jsPaths)
+    .pipe(jscs())
+    .pipe(jscs.reporter());
+});
+
 gulp.task('test', function() {
-  return gulp.src('test/test.js', { read: false }).pipe(mocha());
+  return gulp.src('test/*.js', { read: false })
+    .pipe(mocha());
 });
 
 gulp.task('default', ['jsLint', 'jsStyle']);
-

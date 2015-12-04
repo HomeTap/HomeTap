@@ -1,55 +1,68 @@
 extends layout
 
 block content
-  header
-    img(src='/images/HomeTap.jpg')
   nav.navbar.navbar-default
-    div.container
+    div.container-fluid
       div.navbar-header
-      div.navbar.navbar-collapse
+        button(type='btn' class='navbar-toggle' data-toggle='collapse' data-target='#myNavbar')
+          span(class='icon-bar')
+          span(class='icon-bar')
+          span(class='icon-bar') 
+        a(href='/admin')
+          img.nav(src='/images/hometap.jpg')
+      div(class='collapse navbar-collapse' id='myNavbar')
         ul.nav.navbar-nav
           li
-            a(href='/') User Orders
-          li.active
-            a(href='/admin/beers') Manage Beer Listings
+            a(href='/admin') 
+              button.nav(class='btn navbar-btn' type='button') User Orders
           li
-            a(href='/logout') Logout
+            a(href='/admin/beers')
+              button.nav.active(class='btn navbar-btn' type='button') Manage Beer Listings 
+          li
+            a(href='/logout')
+              button.nav(class='btn navbar-btn' type='button') Logout 
 
-  div.container
+  div.categoryList
     div.col-xs-4.col-md-3
       ul.list-group
-        each category, index in categorylist
-          li.list-group-item
-            a(href='/admin/beers/category/#{index}') #{category}
+        each category, index in categories
+          li.categories.list-group-item
+            a.categories(href='/admin/beers/category/#{index}' class={selected: index == selected}) #{category}
 
     div.col-xs-10.col-md-6
-      table(class='table table-striped ')
+      table.table.table-striped
         thead
           tr: th Beers
         tbody
-          each beer in beerlist
+          each beer in beers
             tr
               td #{beer.name} 
                 td
-                  button(class='deleteButton', data-id= '#{beer._id}') Delete
+                  button(class='btn deleteButton', data-id= '#{beer._id}') Delete
 
     div.container
-      div.col-xs-4.col-md-3
-        form(method='POST', action='/admin/beers')
+      div.row
+        div.col-xs-8
+          form(action='/admin/beers' method='POST')
           h4 Add New Beer
-          input(type='hidden', name='_method', value='add') 
-          input(type='text', name='name', placeholder='Beer Name')
-          p Beer Name
-          select(name='categoryId', placeholder='Category')
-            option(value='', selected='selected')
-              each cat, index in cats
-                option(value='#{index}') #{cat}
-          p Category
-          input(type='text', name='description', placeholder='Descripton')
-          p Description
-          input(type='number', name='stars', placeholder='Stars')
-          p Stars
-          input(type='submit', name='Add Beer', text='Add Beer')
+          input(type='hidden' name='_method' value='add')
+          label(for='name') Beer Name
+          input(type='text' name='name' placeholder='Beer Name')
+          br
+          label(for='categoryId') Category
+          br
+          select(name='categoryId')
+            option(value='' selected='selected')
+            each category, index in categories
+              option(value='#{index}') #{category}
+          br
+          label(for='description') Description
+          input(type='text' name='description' placeholder='Descripton')
+          br
+          label(for='stars') Stars
+          input(type='text' name='stars' placeholder='Stars')
+          br
+          button.submit(class='btn btn primary' type='submit') Submit
+          
 
-  script(type='text/javascript', src='/javascript/adminLib.js')
-
+  script(type='text/javascript', src='/javascripts/admin_lib.js')

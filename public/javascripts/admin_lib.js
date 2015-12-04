@@ -1,10 +1,10 @@
 $(function() {
-
-  $('.fulfillOrder').click(function() {
+  $('.deleteButton').click(function() {
     var self = $(this);
+
     $.ajax({
-      method: 'PUT',
-      url: '/admin/' + this.dataset.id
+      url: '/admin/beers/' + this.dataset.id,
+      method: 'DELETE'
     }).done(function() {
       self.parent().parent().remove();
     });

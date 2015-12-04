@@ -47,24 +47,33 @@ router.get('/register', function(req, res) {
       if (result.isAdmin) return res.redirect('/admin');
       else return res.redirect('/user');
     });
-  } else res.render('register');
+  } else {
+    User.find({}, function(error, results) {
+      if(error) throw error;
+      res.render('register', { 'allUsers': results });
+    });
+  }
 });
 
 router.post('/register', function(req, res) {
   Account.register(new Account({ username: req.body.username }), req.body.password, function(error) {
     if (error) return res.render('register', { message: error.message });
     passport.authenticate('local')(req, res, function() {
-      var newUser = new User({
-        screenName: req.body.screenName,
-        isAdmin: false,
-        queue: [],
-        favorites: [],
-        subscription: req.body.subscription,
-        userIdString: req.user._id.toString()
-      });
-      newUser.save(function(error) {
-        if (error) throw error;
-        res.redirect('/user');
+      User.find({}, function(error, results) {
+        if(error) throw error;
+        var newUser = new User({
+          screenName: req.body.screenName,
+          isAdmin: results.length === 0,
+          queue: [],
+          favorites: [],
+          subscription: req.body.subscription,
+          userIdString: req.user._id.toString()
+        });
+        newUser.save(function(error) {
+          if (error) throw error;
+          if(newUser.isAdmin) res.redirect('/admin');
+          else res.redirect('/user');
+        });
       });
     });
   });

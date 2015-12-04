@@ -8,10 +8,14 @@ There is no special login for administrators. The system will automatically redi
 
 To view a working version of this app please go to: https://hometap.herokuapp.com/
 
+###Creating an Admin Account
+If you are the first person to sign up for an account, the app will inform you that you will be given admin privledges. Your new account will be configured accordingly. Any future registrants will be set up as a standard user by default.
+
 ####The Administrator view
 On the administrators home page is a list of all the users who are expecting orders. Once the order is prepared, the admin may push the send button to update the user's queue, and remove the order from the current list.
 
 As with the user view, all of the beers currently in the database are available in their current categories. Additionally, the admin has the ability to delete individual beers from the library, and at the bottom of the page there is a widget to add beer to the library. 
+
 
 ######Future Features:
 - Add new categories of beer as needed
@@ -32,17 +36,32 @@ To select beers for both the favorites and next beer queues the user should brow
 
 ##Setup Instructions and Code Details
 ###Build
-To build this application you will need to clone this repository and then create an .env file in the root directory of the clone. The .env file should contain the following lines of code:
+To build this application you will need to clone this repository and then 
+
+Then run the ```npm install``` command to add all of the package dependencies. 
+
+Next you will need to open the configuration file config.js and add a valid mongo connetion to the dbURI porperty inside that file. The file should look like this. By default the app will make a local database.
+
+```
+module.exports = {
+  dbURI: process.env.MONGOLAB_URI || Your_Database
+};
+
+```
+
+You can then run the application using ```npm start```
+
+Note: If you are trying to run the app on a local database and it is failing make sure that you have mongo installed, and that it is currently running on your machine. 
+
+##Deploying using Heroku and MongoLab:
+Create an .env file in the root directory of the clone. The .env file should contain the following lines of code:
 
 ```
 MONGOLAB_URI=mongodb://database
 PORT=3000
 ```
-Where 'database' is the path to the database that you are using (this could contain authentication for remote services).
 
-Then run the ```npm install``` command to add all of the package dependencies. 
-
-Currently also you must manually configure the administrator user in the database by setting the isAdmin field to true for the desired user. 
+Where 'database' is the authentication and database as specified by MongoLab. This will overwrite the default setting 
 
 ####Test
 Tests where created using mocha and chai/chai-http. All tests are contained in the test directory inside of the root directory. To run a test use the mocha command in the terminal along with the name of the test file.

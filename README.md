@@ -32,17 +32,22 @@ To select beers for both the favorites and next beer queues the user should brow
 
 ##Setup Instructions and Code Details
 ###Build
-To build this application you will need to clone this repository and then create an .env file in the root directory of the clone. The .env file should contain the following lines of code:
+To build this application you will need to clone this repository and then 
+
+Then run the ```npm install``` command to add all of the package dependencies. 
+
+
+If you are the first user to log into a database you will be created as an admin. All subsequent users will be created as generic users. 
+
+##Deploying using Heroku and MongoLab:
+Create an .env file in the root directory of the clone. The .env file should contain the following lines of code:
 
 ```
 MONGOLAB_URI=mongodb://database
 PORT=3000
 ```
-Where 'database' is the path to the database that you are using (this could contain authentication for remote services).
 
-Then run the ```npm install``` command to add all of the package dependencies. 
-
-Currently also you must manually configure the administrator user in the database by setting the isAdmin field to true for the desired user. 
+Where 'database' is the authentication and database as specified by MongoLab. This will overwrite the default setting 
 
 ####Test
 Tests where created using mocha and chai/chai-http. All tests are contained in the test directory inside of the root directory. To run a test use the mocha command in the terminal along with the name of the test file.

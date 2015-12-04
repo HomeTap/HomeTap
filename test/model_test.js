@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var expect = chai.expect;
 
-var dbURI = require('./config').dbURI;
+var dbURI = require('../config').dbURI;
 var db;
 
 mongoose.connection.on('error', function(error) {
